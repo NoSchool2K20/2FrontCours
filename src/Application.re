@@ -28,7 +28,11 @@ let make = _ => {
     </>;
 
   <>
-    <h1> {React.string("Menu")} </h1>
+    <div>
+      <img
+        src="../src/logo.png"
+        alt="Logo NoSchool"/>
+    </div>
     <div> navMenu </div>
     <div className="content"> innerContent </div>
   </>;

@@ -28,4 +28,4 @@ let makeContainer = text => {
 };
 
 // Mount application
-ReactDOMRe.render(<Application />, makeContainer("My amazing website"));
+ReactDOMRe.render(<Application />, makeContainer("NoSchool"));
