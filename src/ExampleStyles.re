@@ -51,4 +51,8 @@ let style = {j|
   .content {
         padding: 12px;
   }
+  .bienvenue {
+    text-align: center;
+    font-weight : bold;
+  }
 |j};

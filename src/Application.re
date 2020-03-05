@@ -5,7 +5,7 @@ let make = _ => {
   let url = ReasonReactRouter.useUrl();
   let innerContent =
     switch (url.path) {
-    | [] => <p> {React.string("Welcome on our website")} </p>
+    | [] => /*{React.string("Welcome on our website")}*/ <Home /> 
     | ["github"] => <Github token />
     | _ =>
       <p>
