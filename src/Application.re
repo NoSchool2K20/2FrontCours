@@ -6,6 +6,8 @@ let make = _ => {
   let innerContent =
     switch (url.path) {
     | [] => /*{React.string("Welcome on our website")}*/ <Home /> 
+    | ["connection"] => <Connection /> 
+    | ["cours"] => <Cours/>
     | ["github"] => <Github token />
     | _ =>
       <p>

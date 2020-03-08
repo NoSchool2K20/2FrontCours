@@ -13,14 +13,14 @@ let style = {j|
   }
   button {
     background-color: white;
-    color: $reasonReactBlue;
-    box-shadow: 0 0 0 1px $reasonReactBlue;
+    color: black;
+    box-shadow: 0 0 0 1px black;
     border: none;
     padding: 8px;
     font-size: 16px;
   }
   button:active {
-    background-color: $reasonReactBlue;
+    background-color: black;
     color: white;
   }
   button:hover {
@@ -54,5 +54,24 @@ let style = {j|
   .bienvenue {
     text-align: center;
     font-weight : bold;
+  }
+  .titreCours, .descriptionCours, .videoCours{
+    text-align : center;
+  }
+  .titreCours{
+    font-weight:bold;
+    margin-bottom : 4%;
+  }
+  .descriptionCours{
+    margin-bottom:2%;
+  }
+  .videoCours{
+    border : 1px solid black;
+  }
+  .forumButton{
+    text-align:right;
+  }
+  .accueilConnection{
+    text-align:center;
   }
 |j};
