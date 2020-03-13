@@ -2,7 +2,7 @@
 [@bs.val] external document: Js.t({..}) = "document";
 [@bs.val] external fetch: string => Js.Promise.t('a) = "fetch";
 [@bs.module "./TabsModule"]
-external myJSReactClass: ReasonReact.reactClass = "default";
+external myJSReactClass: ReasonReact.reactClass = "TabsModule";
 
 open ReasonUrql;
 open Hooks;
@@ -75,14 +75,14 @@ let make = _ => {
   let parcours = <> <div className="parentContainer" /> </>;
   //Récupérer les parcours ici
 
-  let menuModules = <> </>;
   //Récupérer les modules ici
-  let make = (~className, ~type_, ~value=?, children) =>
+  let make = children =>
     ReasonReact.wrapJsForReason(
       ~reactClass=myJSReactClass,
       ~props=jsProps(~className="module", ~modules=stateModules),
       children,
     );
+  let menuModules = <> </>;
 
   let cours = <> </>;
   //Récupérer les cours ici
