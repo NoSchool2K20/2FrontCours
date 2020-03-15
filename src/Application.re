@@ -15,7 +15,7 @@ let make = _ => {
       </p>
     };
 
-  let navMenu =
+  /*let navMenu =
     <>
       <button
         onClick={_ => ReasonReactRouter.push("/")}
@@ -27,7 +27,7 @@ let make = _ => {
         className={url.path == ["gihub"] ? "selected" : ""}>
         {React.string("My Github")}
       </button>
-    </>;
+    </>;*/
 
   <>
     <div>
@@ -35,7 +35,7 @@ let make = _ => {
         src="../src/logo.png"
         alt="Logo NoSchool"/>
     </div>
-    <div> navMenu </div>
+    //<div> navMenu </div>
     <div className="content"> innerContent </div>
   </>;
 };

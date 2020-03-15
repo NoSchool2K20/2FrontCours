@@ -1,9 +1,4 @@
 [@bs.val] external token: string = "process.env.GITHUB_TOKEN";
-[@bs.val] external document: Js.t({..}) = "document";
-
-let style = document##createElement("style");
-document##head##appendChild(style);
-style##innerHTML #= ExampleStyles.style;
 
 [@react.component]
 let make = _ => {
@@ -15,12 +10,10 @@ let make = _ => {
 
   let parcours = 
   <>
-  //Récupérer les parcours ici
   </>;
 
   let menuModules = 
   <>
-    //Récupérer les modules ici
   </>;
 
   let cours = 
