@@ -34,5 +34,10 @@ let style = {j|
     border-radius : 5px;
     background-color : #F7F7F7;
     padding : 5px;
+    margin-bottom : 10px;
+  }
+  .accueilButton{
+    border-bottom : 1px solid black;
+    margin-bottom : 10px;
   }
 |j};

@@ -73,6 +73,14 @@ let make = _ => {
   let welcome = <> <p> {React.string("BIENVENUE !")} </p> 
   <p> {React.string("Choisissez votre parcours : ")} </p></>;
 
+  let buttonDeconnection=
+  <>
+  <button
+    onClick={_ => ReasonReactRouter.push("/connection")}>
+    {React.string("Deconnection")}
+  </button>
+  </>
+
   let parcours = //<> <div className="parentContainer" /> </>;
   <>
   <button
@@ -142,6 +150,7 @@ let make = _ => {
   //Récupérer les cours ici
 
   <>
+    <div className="buttonDeconnection"> buttonDeconnection </div>
     <div className="bienvenue"> welcome </div>
     <div>
       {switch (stateParcours) {

@@ -8,6 +8,13 @@ let style = {j|
   .bienvenue{
     text-align : center;
     font-weight : bold;
+    margin-top : 40px;
+  }
+  .buttonDeconnection{
+    font-size: 17px;
+    border-radius : 10px;
+    background-color : #F7F7F7;
+    float:right;
   }
   .parcours{
     text-align: center;
@@ -48,5 +55,7 @@ let style = {j|
     border-radius : 5px;
     margin : 5px;
     padding-bottom : 10px;
+    background-color: rgb(224, 226, 229);
+
   }
 |j};
