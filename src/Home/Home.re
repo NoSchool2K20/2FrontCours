@@ -38,7 +38,8 @@ let make = _ => {
       fetch("http://localhost:8080/pokemon-types/")
       |> then_(response => response##json())
       |> then_(jsonResponse => {
-           setStateParcours(jsonResponse);
+           console.log(jsonResponse);
+           setStateParcours(["p"]);
            Js.Promise.resolve();
          })
       |> catch(_err
@@ -155,8 +156,8 @@ let make = _ => {
     <div>
       {switch (stateParcours) {
        | [||] =>
-         <div className="parcours"> parcours
-           
+         <div className="parcours"> // parcours
+           {React.string("Aucun parcours pour le moment")}
          </div>
        | default =>
          stateParcours
