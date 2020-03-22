@@ -35,11 +35,13 @@ let make = _ => {
   // Requests API
   let parcoursList = () =>
     Js.Promise.(
-      fetch("http://localhost:8080/pokemon-types/")
-      |> then_(response => response##json())
+      Fetch.fetchWithInit("http://localhost:8080/pokemon-types/",
+      Fetch.RequestInit.make(~method_=Get, ()),)
+
+      |> then_(Fetch.Response.text)
       |> then_(jsonResponse => {
-           console.log(jsonResponse);
-           setStateParcours(["p"]);
+           Js.log(jsonResponse);
+            //setStateParcours([|"p"|]);
            Js.Promise.resolve();
          })
       |> catch(_err
