@@ -35,12 +35,11 @@ let make = _ => {
   // Requests API
   let parcoursList = () =>
     Js.Promise.(
-      Fetch.fetchWithInit("http://localhost:8080/pokemon-types/",
+      Fetch.fetchWithInit("",
       Fetch.RequestInit.make(~method_=Get, ()),)
-
       |> then_(Fetch.Response.text)
-      |> then_(jsonResponse => {
-           Js.log(jsonResponse);
+      |> then_(text  => {
+           Js.log(text );
             //setStateParcours([|"p"|]);
            Js.Promise.resolve();
          })
@@ -50,17 +49,36 @@ let make = _ => {
       |> ignore
     );
 
-  let fetchOptions =
-    Client.FetchOpts(
-      Fetch.RequestInit.make(
-        ~method_=Post,
-        ~headers=
-          Fetch.HeadersInit.make({
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " ++ token,
-          }),
-        (),
-      ),
+  let getParcoursModules = () =>
+    Js.Promise.(
+      Fetch.fetchWithInit("",
+      Fetch.RequestInit.make(~method_=Get, ()),)
+      |> then_(Fetch.Response.text)
+      |> then_(text  => {
+           Js.log(text );
+            //setStateParcours([|"p"|]);
+           Js.Promise.resolve();
+         })
+      |> catch(_err
+           // setter(_previousState => []);
+           => Js.Promise.resolve())
+      |> ignore
+    );
+
+  let getModuleCours = () =>
+    Js.Promise.(
+      Fetch.fetchWithInit("",
+      Fetch.RequestInit.make(~method_=Get, ()),)
+      |> then_(Fetch.Response.text)
+      |> then_(text  => {
+           Js.log(text );
+            //setStateParcours([|"p"|]);
+           Js.Promise.resolve();
+         })
+      |> catch(_err
+           // setter(_previousState => []);
+           => Js.Promise.resolve())
+      |> ignore
     );
 
   // let message = Client.make(~url="", ~fetchOptions, ());

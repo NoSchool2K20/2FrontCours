@@ -10,7 +10,9 @@ let make = _ => {
 
   let formulaire =
   <>
-      // Récupérer le composant connection
+      <Form name="Imani">
+        <div> {React.string("Effectively the child.")} </div>
+      </Form>
   </>;
 
   <>

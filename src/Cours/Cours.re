@@ -41,7 +41,7 @@ let make = _ => {
     </iframe>
   </>;
 
-  let forum = 
+  let buttonForum =
   <>
     // Récupérer le forum
     <button
@@ -50,9 +50,16 @@ let make = _ => {
       </button>
   </>;
 
+  let forum =
+  <>
+        <Forum name="Imani">
+          <div> {React.string("Effectively the child.")} </div>
+        </Forum>
+  </>;
+
   <>
     <div className="accueilButton"> accueil </div>
-    <div className="forumButton"> forum </div>
+    <div className="forumButton"> buttonForum </div>
     <div className="titreCours"> titre </div>
     <div className="descriptionCours"> description </div>
     <div className="videoCours">video</div>
