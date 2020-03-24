@@ -1,9 +1,7 @@
-module Forum = {
-  [@react.component]
-  let make = (~name, ~children) => {
-    <div>
-      <p> {React.string("Hello, " ++ name)} </p>
-      children
-    </div>
-  };
+[@react.component]
+let make = (~name, ~children) => {
+  <div>
+    <p> {React.string("Hello, " ++ name)} </p>
+    children
+  </div>
 };
