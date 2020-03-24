@@ -1,8 +1,6 @@
 [@bs.val] external token: string = "process.env.GITHUB_TOKEN";
 [@bs.val] external document: Js.t({..}) = "document";
 [@bs.val] external fetch: string => Js.Promise.t('a) = "fetch";
-[@bs.module "./TabsModule"]
-external myJSReactClass: ReasonReact.reactClass = "TabsModule";
 
 open ReasonUrql;
 open Hooks;
