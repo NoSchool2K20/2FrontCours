@@ -31,7 +31,7 @@ let style = {j|
     font-weight: bold;
   }
   .containerContent {
-    background-color: #D0CBCE;
+    background-color: #FFF5EE;
     padding: 16px;
     border-radius: 0px 0px 12px 12px;
   }
