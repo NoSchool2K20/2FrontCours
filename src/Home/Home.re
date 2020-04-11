@@ -44,23 +44,6 @@ let (stateModules, setStateModules) = React.useState(() => []);
     json |> Moduleslist.fromJson
   ;
 
-  // Requests API
-  let parcoursList = () =>
-    Js.Promise.(
-      Fetch.fetchWithInit("http://18.220.58.155:8080/parcours",
-      Fetch.RequestInit.make(~method_=Get, ()),)
-      |> then_(Fetch.Response.json)
-      |> then_(json  => {
-           let decoded = decodeParcours(json);
-           setStateParcours(_ => List.append(stateParcours, decoded));
-           Js.Promise.resolve(List.append(stateParcours, decoded));
-
-         })
-      /*|> catch(_err
-           Js.Promise.resolve()
-      |> ignore*/
-    );
-
   let getParcoursModules = (title) =>
     Js.Promise.(
       Fetch.fetchWithInit("http://18.220.58.155:8080/module/?parcours=" ++ title,
@@ -70,6 +53,24 @@ let (stateModules, setStateModules) = React.useState(() => []);
            let decoded = decodeModules(json);
            setStateModules(_ => List.append(stateModules, decoded));
            Js.Promise.resolve();
+
+         })
+      /*|> catch(_err
+           Js.Promise.resolve()
+      |> ignore*/
+    );
+
+  // Requests API
+  let parcoursList = () =>
+    Js.Promise.(
+      Fetch.fetchWithInit("http://18.220.58.155:8080/parcours",
+      Fetch.RequestInit.make(~method_=Get, ()),)
+      |> then_(Fetch.Response.json)
+      |> then_(json  => {
+           let decoded = decodeParcours(json);
+           setStateParcours(_ => List.append(stateParcours, decoded));
+           //getParcoursModules(Parcours.getTitle(List.nth(stateParcours,0)));
+           Js.Promise.resolve(List.append(stateParcours, decoded));
 
          })
       /*|> catch(_err
