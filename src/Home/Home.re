@@ -30,8 +30,8 @@ type jsProps = {
 
 [@react.component]
 let make = _ => {
+let (stateParcours, setStateParcours) = React.useState(() => []);
 
-  let stateParcours : list(Parcours.t) = [];
 
   let decodeParcours= json =>
     json |> Parcourslist.fromJson
@@ -45,8 +45,9 @@ let make = _ => {
       |> then_(Fetch.Response.json)
       |> then_(json  => {
            let decoded = decodeParcours(json);
-           Js.log(decoded);
+           setStateParcours(_ => List.append(stateParcours, decoded));
            Js.Promise.resolve(List.append(stateParcours, decoded));
+
          })
       /*|> catch(_err
            //setter(_previousState => []);
@@ -174,11 +175,16 @@ let make = _ => {
            {React.string("Aucun parcours pour le moment")}
          </div>
        | _ =>
-        /*stateParcours
-         ->Belt.List.mapWithIndex((i, p) =>
-             <div className="parcours"> {React.string(Parcours.getTitle(p))} </div>
-           )*/
-           <div className="parcours"> {React.string(Parcours.getTitle(List.nth(stateParcours,0)))} </div>
+        <div className="parcoursList">
+              (
+                React.array(Array.of_list(
+                    List.map((p) =>
+                    <div href="" className="parcours"> {React.string(Parcours.getTitle(p))} </div>
+                    , stateParcours)
+                ))
+              )
+        </div>
+           //<div className="parcours"> {React.string(Parcours.getTitle(List.nth(stateParcours,0)))} </div>
        }}
     </div>
 
