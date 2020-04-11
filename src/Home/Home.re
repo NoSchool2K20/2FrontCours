@@ -7,6 +7,7 @@ open Hooks;
 open Parcours;
 open Parcourslist;
 open Module;
+open Moduleslist;
 
 let style = document##createElement("style");
 document##head##appendChild(style);
@@ -19,8 +20,9 @@ style##innerHTML #= HomeStyle.style;
 type jsProps = {
   /* some example fields */
   className: string,
-  //modules: array(modules),
+  modules: Moduleslist.t,
   parcours: Parcourslist.t,
+
 
   //    /* `type` is reserved in Reason. use `type_` and make it still compile to the
   //       JS key `type` */
@@ -192,7 +194,23 @@ let (stateModules, setStateModules) = React.useState(() => []);
     </div>
 
     <div className="menuModules"> 
-    menuModules
+    {switch (stateModules) {
+           | [] =>
+             <button>
+                {React.string("Aucun Module")}
+             </button>
+           | _ =>
+            (
+                React.array(Array.of_list(
+                    List.map((m) =>
+                        <button
+                            onClick={ _ => ReasonReactRouter.push("/")}>
+                            {React.string(Modules.getTitle(m))}
+                        </button>
+                        , stateModules)
+                 ))
+            )
+           }}
     </div>
 
     <div className="cours"> 
