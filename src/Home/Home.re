@@ -4,21 +4,22 @@
 
 open ReasonUrql;
 open Hooks;
+open Parcours;
+open Parcourslist;
 
 let style = document##createElement("style");
 document##head##appendChild(style);
 style##innerHTML #= HomeStyle.style;
 
-[@bs.deriving jsConverter]
-type moduleParcours = {title: string};
-type parcours = {title: string, description : string};
+//[@bs.deriving jsConverter]
+//type modules = {title: string};
 
 [@bs.deriving abstract]
 type jsProps = {
   /* some example fields */
   className: string,
-  modules: array(moduleParcours),
-  parcours: array(parcours),
+  //modules: array(modules),
+  parcours: Parcourslist.t,
 
   //    /* `type` is reserved in Reason. use `type_` and make it still compile to the
   //       JS key `type` */
@@ -29,15 +30,12 @@ type jsProps = {
 
 [@react.component]
 let make = _ => {
-  let (stateVideos, setStateVideos) = React.useState(() => [||]);
-  let (stateParcours, setStateParcours) = React.useState(() => [||]); 
-  let (stateModules, setStateModules) = React.useState(() => [||]);
 
-  let decodeTitleParcours= json =>
-  Json.Decode.{
-    title: json |> field("title", string),
-    description: json |> field("description", string),
-  };
+  let stateParcours : list(Parcours.t) = [];
+
+  let decodeParcours= json =>
+    json |> Parcourslist.fromJson
+  ;
 
   // Requests API
   let parcoursList = () =>
@@ -46,14 +44,13 @@ let make = _ => {
       Fetch.RequestInit.make(~method_=Get, ()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
-          json |> decodeTitleParcours
-               |> res => setStateParcours(stateParcours => Array.append(stateParcours,[|res|]))
-               |> resolve
-               
+           let decoded = decodeParcours(json);
+           Js.log(decoded);
+           Js.Promise.resolve(List.append(stateParcours, decoded));
          })
-      |> catch(_err
+      /*|> catch(_err
            //setter(_previousState => []);
-           => Js.Promise.resolve())
+           => Js.Promise.resolve())*/
       |> ignore
     );
 
@@ -95,7 +92,6 @@ let make = _ => {
   //let parcoursList = Array.make(~url="localhost", ~fetchOptions, ());
   React.useEffect0(() => {
     parcoursList();
-    Js.log(stateParcours);
     None;
   });
 
@@ -173,16 +169,16 @@ let make = _ => {
     <div className="bienvenue"> welcome </div>
     <div>
       {switch (stateParcours) {
-       | [||] =>
+       | [] =>
          <div className="parcours"> 
            {React.string("Aucun parcours pour le moment")}
          </div>
        | _ =>
-         stateParcours
-         ->Belt.Array.mapWithIndex((i, p) =>
-             <div className="parcours"> {React.string(stateParcours[i].title)} </div>
-           )
-         ->React.array
+        /*stateParcours
+         ->Belt.List.mapWithIndex((i, p) =>
+             <div className="parcours"> {React.string(Parcours.getTitle(p))} </div>
+           )*/
+           <div className="parcours"> {React.string(Parcours.getTitle(List.nth(stateParcours,0)))} </div>
        }}
     </div>
 
