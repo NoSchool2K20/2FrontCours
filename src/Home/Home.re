@@ -6,6 +6,7 @@ open ReasonUrql;
 open Hooks;
 open Parcours;
 open Parcourslist;
+open Module;
 
 let style = document##createElement("style");
 document##head##appendChild(style);
@@ -31,10 +32,14 @@ type jsProps = {
 [@react.component]
 let make = _ => {
 let (stateParcours, setStateParcours) = React.useState(() => []);
-
+let (stateModules, setStateModules) = React.useState(() => []);
 
   let decodeParcours= json =>
     json |> Parcourslist.fromJson
+  ;
+
+  let decodeModules= json =>
+    json |> Moduleslist.fromJson
   ;
 
   // Requests API
@@ -50,26 +55,24 @@ let (stateParcours, setStateParcours) = React.useState(() => []);
 
          })
       /*|> catch(_err
-           //setter(_previousState => []);
-           => Js.Promise.resolve())*/
-      |> ignore
+           Js.Promise.resolve()
+      |> ignore*/
     );
 
-  let getParcoursModules = () =>
+  let getParcoursModules = (title) =>
     Js.Promise.(
-      Fetch.fetchWithInit("http://18.220.58.155:8080/module/?parcours=MIAGE",
+      Fetch.fetchWithInit("http://18.220.58.155:8080/module/?parcours=" ++ title,
       Fetch.RequestInit.make(~method_=Get, ()),)
-      |> then_(Fetch.Response.text)
-      |> then_(text  => {
-           Js.log(text );
-          
-            //setStateParcours([|"p"|]);
+      |> then_(Fetch.Response.json)
+      |> then_(json  => {
+           let decoded = decodeModules(json);
+           setStateModules(_ => List.append(stateModules, decoded));
            Js.Promise.resolve();
+
          })
-      |> catch(_err
-           // setter(_previousState => []);
-           => Js.Promise.resolve())
-      |> ignore
+      /*|> catch(_err
+           Js.Promise.resolve()
+      |> ignore*/
     );
 
   let getModuleCours = () =>
@@ -93,6 +96,7 @@ let (stateParcours, setStateParcours) = React.useState(() => []);
   //let parcoursList = Array.make(~url="localhost", ~fetchOptions, ());
   React.useEffect0(() => {
     parcoursList();
+    getParcoursModules("MIAGE");
     None;
   });
 
@@ -179,12 +183,11 @@ let (stateParcours, setStateParcours) = React.useState(() => []);
               (
                 React.array(Array.of_list(
                     List.map((p) =>
-                    <div href="" className="parcours"> {React.string(Parcours.getTitle(p))} </div>
+                    <div className="parcours" /*onClick={_ => getParcoursModules(Parcours.getTitle(p))}*/> {React.string(Parcours.getTitle(p))} </div>
                     , stateParcours)
                 ))
               )
         </div>
-           //<div className="parcours"> {React.string(Parcours.getTitle(List.nth(stateParcours,0)))} </div>
        }}
     </div>
 

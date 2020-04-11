@@ -58,4 +58,9 @@ let style = {j|
     background-color: rgb(224, 226, 229);
 
   }
+
+  .parcoursList .parcours button{
+    text-align: center;
+
+  }
 |j};
