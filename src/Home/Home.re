@@ -8,6 +8,7 @@ open Parcours;
 open Parcourslist;
 open Module;
 open Moduleslist;
+open Cours;
 
 let style = document##createElement("style");
 document##head##appendChild(style);
@@ -18,11 +19,11 @@ style##innerHTML #= HomeStyle.style;
 
 [@bs.deriving abstract]
 type jsProps = {
-  /* some example fields */
+
   className: string,
   modules: Moduleslist.t,
   parcours: Parcourslist.t,
-
+  cours: Courslist.t,
 
   //    /* `type` is reserved in Reason. use `type_` and make it still compile to the
   //       JS key `type` */
@@ -35,6 +36,7 @@ type jsProps = {
 let make = _ => {
 let (stateParcours, setStateParcours) = React.useState(() => []);
 let (stateModules, setStateModules) = React.useState(() => []);
+let (stateCours, setStateCours) = React.useState(() => []);
 
   let decodeParcours= json =>
     json |> Parcourslist.fromJson
@@ -42,6 +44,10 @@ let (stateModules, setStateModules) = React.useState(() => []);
 
   let decodeModules= json =>
     json |> Moduleslist.fromJson
+  ;
+
+  let decodeCours= json =>
+    json |> Courslist.fromJson
   ;
 
   let getParcoursModules = (title) =>
@@ -69,7 +75,6 @@ let (stateModules, setStateModules) = React.useState(() => []);
       |> then_(json  => {
            let decoded = decodeParcours(json);
            setStateParcours(_ => List.append(stateParcours, decoded));
-           //getParcoursModules(Parcours.getTitle(List.nth(stateParcours,0)));
            Js.Promise.resolve(List.append(stateParcours, decoded));
 
          })
@@ -78,19 +83,19 @@ let (stateModules, setStateModules) = React.useState(() => []);
       |> ignore*/
     );
 
-  let getModuleCours = () =>
+  let getModuleCours = (title) =>
     Js.Promise.(
-      Fetch.fetchWithInit("",
+      Fetch.fetchWithInit("http://18.220.58.155:8080/cours/?module=" ++ title,
       Fetch.RequestInit.make(~method_=Get, ()),)
-      |> then_(Fetch.Response.text)
-      |> then_(text  => {
-           Js.log(text );
-            //setStateParcours([|"p"|]);
+      |> then_(Fetch.Response.json)
+      |> then_(json  => {
+           let decoded = decodeCours(json);
+           setStateCours(_ => List.append(stateCours, decoded));
            Js.Promise.resolve();
          })
-      |> catch(_err
-           // setter(_previousState => []);
-           => Js.Promise.resolve())
+//      |> catch(_err
+//           // setter(_previousState => []);
+//           => Js.Promise.resolve())
       |> ignore
     );
 
@@ -100,6 +105,7 @@ let (stateModules, setStateModules) = React.useState(() => []);
   React.useEffect0(() => {
     parcoursList();
     getParcoursModules("MIAGE");
+    getModuleCours("Licence 3 MIAGE");
     None;
   });
 
@@ -114,7 +120,7 @@ let (stateModules, setStateModules) = React.useState(() => []);
     onClick={_ => ReasonReactRouter.push("/connection")}>
     {React.string("Deconnection")}
   </button>
-  </>
+  </>;
 
   //Récupérer les modules ici
   /*let make = children =>
@@ -123,54 +129,6 @@ let (stateModules, setStateModules) = React.useState(() => []);
       ~props=jsProps(~className="module", ~modules=stateModules),
       children,
     );*/
-  let menuModules = <> 
-  <button
-              onClick={_ => ReasonReactRouter.push("/")}>
-              {React.string("Module 1")}
-          </button>
-          <button
-              onClick={_ => ReasonReactRouter.push("/")}>
-              {React.string("Module 2")}
-          </button>
-          <button
-              onClick={_ => ReasonReactRouter.push("/")}>
-              {React.string("Module 3")}
-          </button>
-          <button
-              onClick={_ => ReasonReactRouter.push("/")}>
-              {React.string("Module 4")}
-          </button>
-  </>;
-
-  let cours = 
-  <> 
-  <div>
-        <p className="titre"> {React.string("Cours 1")} </p> 
-        <p> {React.string("Description cours 1")} </p>
-        <button
-              onClick={_ => ReasonReactRouter.push("/")}>
-              {React.string("Acces au contenu")}
-          </button>
-      </div>
-
-    <div>
-        <p className="titre"> {React.string("Cours 2")} </p> 
-        <p> {React.string("Description cours 2")} </p>
-        <button
-              onClick={_ => ReasonReactRouter.push("/")}>
-              {React.string("Acces au contenu")}
-          </button>
-      </div>
-      <div>
-        <p className="titre"> {React.string("Cours 3")} </p> 
-        <p> {React.string("Description cours 3")} </p>
-        <button
-              onClick={_ => ReasonReactRouter.push("/")}>
-              {React.string("Acces au contenu")}
-          </button>
-      </div>
-  </>;
-  //Récupérer les cours ici
 
   <>
     <div className="buttonDeconnection"> buttonDeconnection </div>
@@ -214,8 +172,28 @@ let (stateModules, setStateModules) = React.useState(() => []);
            }}
     </div>
 
-    <div className="cours"> 
-    cours 
+    <div className="cours">
+    {switch (stateCours) {
+               | [] =>
+                 <div>
+                    <p> {React.string("Aucun cours pour le moment")} </p>
+                  </div>
+               | _ =>
+                (
+                    React.array(Array.of_list(
+                        List.map((c) =>
+                            <div>
+                                <p className="titre"> {React.string(Cours.getTitle(c))} </p>
+                                <p> {React.string(Cours.getDescription(c))} </p>
+                                <button
+                                    onClick={ _=> ReasonReactRouter.push("/")}>
+                                    {React.string("Accès au contenu")}
+                                </button>
+                            </div>
+                            , stateCours)
+                     ))
+                )
+    }}
     </div>
   </>;
 };

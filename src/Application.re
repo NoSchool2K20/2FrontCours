@@ -7,7 +7,7 @@ let make = _ => {
     switch (url.path) {
     | [] => /*{React.string("Welcome on our website")}*/ <Home /> 
     | ["connection"] => <Connection /> 
-    | ["cours"] => <Cours/>
+    | ["cours"] => <CoursPage/>
     | ["github"] => <Github token />
     | _ =>
       <p>
