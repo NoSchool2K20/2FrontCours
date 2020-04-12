@@ -8,9 +8,32 @@ let style = document##createElement("style");
 document##head##appendChild(style);
 style##innerHTML #= CoursStyle.style;
 
-[@react.component]
-let make = _ => {
+open Cours;
 
+[@react.component]
+let make = (~title) => {
+
+  let (stateCours, setStateCours) = React.useState(() => Cours.make("","",""));
+
+  let decodeCours= json =>
+    json |> Cours.fromJson
+  ;
+
+  let getModuleCours = (title) =>
+    Js.Promise.(
+      Fetch.fetchWithInit("",
+      Fetch.RequestInit.make(~method_=Get, ()),)
+      |> then_(Fetch.Response.json)
+      |> then_(json  => {
+           let decoded = decodeCours(json);
+           setStateCours(_ => decoded);
+           Js.Promise.resolve();
+         })
+//      |> catch(_err
+//           // setter(_previousState => []);
+//           => Js.Promise.resolve())
+      |> ignore
+    );
 
   let accueil = 
   <>
@@ -24,20 +47,20 @@ let make = _ => {
   let titre =
   <>
       // Récupérer le titre
-      <p> {React.string("TITRE DU COURS NUMERO 1")} </p>
+      <p> {React.string(title)} </p>
   </>;
 
   let description = 
   <>
   // Récupérer la description
-  <p> {React.string("Le but de ce cours est de pouvoir tester le CSS de NotOnlyASchool.")} </p>
+  <p> {React.string(Cours.getDescription(stateCours))} </p>
   </>;
 
   let video = 
   <>
     //Récupérer la video
     <iframe  width="425" height="344" 
-    src="http://www.youtube.com/embed/_-KEFeWLVtY" >
+    src=Cours.getVideoUrl(stateCours) >
     </iframe>
   </>;
 

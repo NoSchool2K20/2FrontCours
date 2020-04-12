@@ -43,6 +43,7 @@ module Cours: {
       ])
     );
   let toString = cours => toJson(cours) |> Js.Json.stringify;
+        
 };
 
 module Courslist: {

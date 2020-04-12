@@ -186,7 +186,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
                                 <p className="titre"> {React.string(Cours.getTitle(c))} </p>
                                 <p> {React.string(Cours.getDescription(c))} </p>
                                 <button
-                                    onClick={ _=> ReasonReactRouter.push("/")}>
+                                    onClick={ _=> ReasonReactRouter.push("/cours/" ++ Cours.getTitle(c))}>
                                     {React.string("Accès au contenu")}
                                 </button>
                             </div>
