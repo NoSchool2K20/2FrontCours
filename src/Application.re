@@ -5,29 +5,14 @@ let make = _ => {
   let url = ReasonReactRouter.useUrl();
   let innerContent =
     switch (url.path) {
-    | [] => /*{React.string("Welcome on our website")}*/ <Home /> 
+    | [] => <Home /> 
     | ["connection"] => <Connection /> 
     | ["cours", title] => <CoursPage title=title />
-    | ["github"] => <Github token />
     | _ =>
       <p>
         <img src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" />
       </p>
     };
-
-  /*let navMenu =
-    <>
-      <button
-        onClick={_ => ReasonReactRouter.push("/")}
-        className={url.path == [] ? "selected" : ""}>
-        {React.string("Home")}
-      </button>
-      <button
-        onClick={_ => ReasonReactRouter.push("/github")}
-        className={url.path == ["gihub"] ? "selected" : ""}>
-        {React.string("My Github")}
-      </button>
-    </>;*/
 
   <>
     <div>

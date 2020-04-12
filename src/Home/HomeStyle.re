@@ -16,15 +16,20 @@ let style = {j|
     background-color : #F7F7F7;
     float:right;
   }
-  .parcours{
+
+  .parcours {
     text-align: center;
     margin-bottom : 20px;
-  }
-  .parcours button{
     padding : 25px;
     border-radius : 10px;
     margin : 7px;
     font-size : 20px;
+    background-color: gainsboro;
+    margin: 0 auto;
+    width : 15%;
+    align-item:center;
+    cursor: pointer;
+
   }
   .menuModules{
     border-top : 2px solid Gray;

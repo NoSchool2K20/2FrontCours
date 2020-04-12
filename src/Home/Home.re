@@ -50,6 +50,22 @@ let (stateCours, setStateCours) = React.useState(() => []);
     json |> Courslist.fromJson
   ;
 
+  let getModuleCours = (title) =>
+    Js.Promise.(
+      Fetch.fetchWithInit("http://18.220.58.155:8080/cours/?module=" ++ title,
+      Fetch.RequestInit.make(~method_=Get, ()),)
+      |> then_(Fetch.Response.json)
+      |> then_(json  => {
+           let decoded = decodeCours(json);
+           setStateCours(_ => List.append(stateCours, decoded));
+           Js.Promise.resolve();
+         })
+//      |> catch(_err
+//           // setter(_previousState => []);
+//           => Js.Promise.resolve())
+      |> ignore
+    );
+
   let getParcoursModules = (title) =>
     Js.Promise.(
       Fetch.fetchWithInit("http://18.220.58.155:8080/module/?parcours=" ++ title,
@@ -58,6 +74,8 @@ let (stateCours, setStateCours) = React.useState(() => []);
       |> then_(json  => {
            let decoded = decodeModules(json);
            setStateModules(_ => List.append(stateModules, decoded));
+           getModuleCours(Modules.getTitle(List.nth(decoded,0)));
+
            Js.Promise.resolve();
 
          })
@@ -75,6 +93,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
       |> then_(json  => {
            let decoded = decodeParcours(json);
            setStateParcours(_ => List.append(stateParcours, decoded));
+           getParcoursModules(Parcours.getTitle(List.nth(decoded,0)));
            Js.Promise.resolve(List.append(stateParcours, decoded));
 
          })
@@ -83,29 +102,11 @@ let (stateCours, setStateCours) = React.useState(() => []);
       |> ignore*/
     );
 
-  let getModuleCours = (title) =>
-    Js.Promise.(
-      Fetch.fetchWithInit("http://18.220.58.155:8080/cours/?module=" ++ title,
-      Fetch.RequestInit.make(~method_=Get, ()),)
-      |> then_(Fetch.Response.json)
-      |> then_(json  => {
-           let decoded = decodeCours(json);
-           setStateCours(_ => List.append(stateCours, decoded));
-           Js.Promise.resolve();
-         })
-//      |> catch(_err
-//           // setter(_previousState => []);
-//           => Js.Promise.resolve())
-      |> ignore
-    );
-
   // let message = Client.make(~url="", ~fetchOptions, ());
 
   //let parcoursList = Array.make(~url="localhost", ~fetchOptions, ());
   React.useEffect0(() => {
     parcoursList();
-    getParcoursModules("MIAGE");
-    getModuleCours("Licence 3 MIAGE");
     None;
   });
 
@@ -144,7 +145,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
               (
                 React.array(Array.of_list(
                     List.map((p) =>
-                    <div className="parcours" /*onClick={_ => getParcoursModules(Parcours.getTitle(p))}*/> {React.string(Parcours.getTitle(p))} </div>
+                    <div className="parcours" /*onClick={(_) => getParcoursModules(Parcours.getTitle(p))}*/> {React.string(Parcours.getTitle(p))} </div>
                     , stateParcours)
                 ))
               )
