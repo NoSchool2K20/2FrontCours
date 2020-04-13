@@ -73,12 +73,13 @@ let make = (~title) => {
       </button>
   </>;
 
-  let forum =
+  /*let forum =
   <>
-        <Forum name="Imani">
+        <Forum name={Dom.Storage.(localStorage |> getItem("token")
+    )}>
           <div> {React.string("Effectively the child.")} </div>
         </Forum>
-  </>;
+  </>;*/
 
   <>
     <div className="accueilButton"> accueil </div>
