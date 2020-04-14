@@ -3,7 +3,6 @@
 [@bs.val] external fetch: string => Js.Promise.t('a) = "fetch";
 
 open ReasonUrql;
-open Hooks;
 open Parcours;
 open Parcourslist;
 open Module;
@@ -50,12 +49,6 @@ let (stateCours, setStateCours) = React.useState(() => []);
     json |> Courslist.fromJson
   ;
 
-  /*let dropAll= list =>
-  switch list {
-  | [] => []
-  | [_, ...tail] => []
-  };*/
-
   let getModuleCours = (title) =>
     Js.Promise.(
       Fetch.fetchWithInit("http://18.220.58.155:8080/cours/?module=" ++ title,
@@ -63,13 +56,12 @@ let (stateCours, setStateCours) = React.useState(() => []);
       |> then_(Fetch.Response.json)
       |> then_(json  => {
            let decoded = decodeCours(json);
-           setStateCours(_ => []);
-           setStateCours(_ => List.append(stateCours, decoded));
+           setStateCours(_ => List.append([], decoded));
            Js.Promise.resolve();
          })
-//      |> catch(_err
-//           // setter(_previousState => []);
-//           => Js.Promise.resolve())
+
+      |> catch(_err
+           => Js.Promise.resolve())
       |> ignore
     );
 
@@ -80,15 +72,14 @@ let (stateCours, setStateCours) = React.useState(() => []);
       |> then_(Fetch.Response.json)
       |> then_(json  => {
            let decoded = decodeModules(json);
-           setStateModules(_ => []);
-           setStateModules(_ => List.append(stateModules, decoded));
+           setStateModules(_ => List.append([], decoded));
            getModuleCours(Modules.getTitle(List.nth(decoded,0)));
            Js.Promise.resolve();
 
          })
-      /*|> catch(_err
-           Js.Promise.resolve()
-      |> ignore*/
+      |> catch(_err
+           => Js.Promise.resolve())
+      |> ignore
     );
 
   // Requests API
@@ -101,12 +92,12 @@ let (stateCours, setStateCours) = React.useState(() => []);
            let decoded = decodeParcours(json);
            setStateParcours(_ => List.append(stateParcours, decoded));
            getParcoursModules(Parcours.getTitle(List.nth(decoded,0)));
-           Js.Promise.resolve(List.append(stateParcours, decoded));
+           Js.Promise.resolve();
 
          })
-      /*|> catch(_err
-           Js.Promise.resolve()
-      |> ignore*/
+      |> catch(_err
+           => Js.Promise.resolve())
+      |> ignore
     );
 
   // let message = Client.make(~url="", ~fetchOptions, ());
@@ -152,7 +143,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
               (
                 React.array(Array.of_list(
                     List.map((p) =>
-                    <div className="parcours" onClick={(_) => { getParcoursModules(Parcours.getTitle(p));();}}> {React.string(Parcours.getTitle(p))} </div>
+                    <div className="parcours" onClick={(_) => {getParcoursModules(Parcours.getTitle(p));();}}> {React.string(Parcours.getTitle(p))} </div>
                     , stateParcours)
                 ))
               )
@@ -171,7 +162,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
                 React.array(Array.of_list(
                     List.map((m) =>
                         <button
-                            onClick={(_) => { getModuleCours(Modules.getTitle(m));();}}>
+                            onClick={(_) => {getModuleCours(Modules.getTitle(m));();}}>
                             {React.string(Modules.getTitle(m))}
                         </button>
                         , stateModules)
