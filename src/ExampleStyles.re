@@ -26,19 +26,36 @@ let style = {j|
   }
   .containerTitle {
     background-color: rgb(242, 243, 245);
-    border-radius: 12px 12px 0px 0px;
+    border-radius: 12px 12px 12px 12px;
     padding: 12px;
     font-weight: bold;
   }
   .containerContent {
     background-color: #FFF5EE;
-    padding: 16px;
-    border-radius: 0px 0px 12px 12px;
+    border-radius: 12px 12px 12px 12px;
   }
   .content {
-        padding: 12px;
   }
   .accueilConnection{
     text-align:center;
+  }
+
+  .logo{
+    height: 150px;
+    background-color:darkgray;
+    border-radius: 12px 12px 0px 0px;
+  }
+
+  .logo img{
+    margin-top:30px;
+    margin-left:30px;
+  }
+
+  .logo div{
+    display : inline-block;
+    margin-left : 20%;
+    color: #FFF5EE;
+    font-size: 28px;
+    margin-bottom: 20px;
   }
 |j};

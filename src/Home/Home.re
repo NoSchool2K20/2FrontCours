@@ -110,8 +110,8 @@ let (stateCours, setStateCours) = React.useState(() => []);
 
   // Render //
 
-  let welcome = <> <p> {React.string("BIENVENUE !")} </p> 
-  <p> {React.string("Choisissez votre parcours : ")} </p></>;
+  /*let welcome = <> <p> {React.string("BIENVENUE !")} </p> 
+  <p> {React.string("Choisissez votre parcours : ")} </p></>;*/
 
   let buttonDeconnection=
   <>
@@ -131,7 +131,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
 
   <>
     <div className="buttonDeconnection"> buttonDeconnection </div>
-    <div className="bienvenue"> welcome </div>
+    //<div className="bienvenue"> welcome </div>
     <div>
       {switch (stateParcours) {
        | [] =>
@@ -140,6 +140,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
          </div>
        | _ =>
         <div className="parcoursList">
+        <div className="choseParcours">  {React.string("Nos parcours")} </div>
               (
                 React.array(Array.of_list(
                     List.map((p) =>

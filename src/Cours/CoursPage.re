@@ -16,24 +16,28 @@ let make = (~title) => {
   let (stateCours, setStateCours) = React.useState(() => Cours.make("","",""));
 
   let decodeCours= json =>
-    json |> Cours.fromJson
+    json |> Courslist.fromJson
   ;
 
   let getModuleCours = (title) =>
     Js.Promise.(
-      Fetch.fetchWithInit("",
+      Fetch.fetchWithInit("http://18.220.58.155:8080/cours/?title=" ++ title,
       Fetch.RequestInit.make(~method_=Get, ()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
            let decoded = decodeCours(json);
-           setStateCours(_ => decoded);
+           setStateCours(_ => List.nth(decoded,0));
            Js.Promise.resolve();
          })
-//      |> catch(_err
-//           // setter(_previousState => []);
-//           => Js.Promise.resolve())
+      |> catch(_err
+           => Js.Promise.resolve())
       |> ignore
     );
+
+  React.useEffect0(() => {
+    getModuleCours(title);
+    None;
+  });
 
   let accueil = 
   <>

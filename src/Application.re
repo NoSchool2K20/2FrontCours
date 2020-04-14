@@ -15,12 +15,15 @@ let make = _ => {
     };
 
   <>
-    <div>
+    <div className="logo">
       <img
         src="../src/logo.png"
         alt="Logo NoSchool"/>
+
+        <div> 
+          {React.string("Bienvenue !")}
+        </div>
     </div>
-    //<div> navMenu </div>
     <div className="content"> innerContent </div>
   </>;
 };

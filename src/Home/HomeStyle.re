@@ -61,11 +61,23 @@ let style = {j|
     margin : 5px;
     padding-bottom : 10px;
     background-color: rgb(224, 226, 229);
-
   }
 
-  .parcoursList .parcours button{
-    text-align: center;
+  .parcoursList{
+    height:110px;
+    margin-bottom: 30px;
+  }
 
+  .parcoursList .choseParcours{
+    text-align:center;
+    font-size: 24px;
+    font-family: arial;
+    padding-top:30px;
+  }
+
+  .parcoursList .parcours{
+    text-align: center;
+    margin-top:30px;
+    padding:10px;
   }
 |j};
