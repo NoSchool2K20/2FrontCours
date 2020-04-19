@@ -1,7 +1,7 @@
 [@react.component]
-let make = (~token, ~titleCours, ~children) => {
+let make = (~token, ~titleCours) => {
   <div>
     <p> {React.string("Hello World")} </p>
-    children
+    
   </div>
 };

@@ -12,9 +12,10 @@ let style = {j|
   }
   .buttonDeconnection{
     font-size: 17px;
-    border-radius : 10px;
     background-color : #F7F7F7;
     float:right;
+    margin : 5px;
+    border-radius : 3px;
   }
 
   .parcours {
@@ -53,7 +54,7 @@ let style = {j|
     border-bottom : 10px;
     margin : 10px;
   }
-  .cours div{
+  .cours .leCours{
     display : inline-block;
     border : 1px solid Gray;
     width : 20%;
@@ -79,5 +80,11 @@ let style = {j|
     text-align: center;
     margin-top:30px;
     padding:10px;
+  }
+
+  .buttonPrivileges{
+    float:right;
+    margin : 5px;
+    border-radius : 3px;
   }
 |j};

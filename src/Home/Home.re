@@ -113,11 +113,27 @@ let (stateCours, setStateCours) = React.useState(() => []);
   /*let welcome = <> <p> {React.string("BIENVENUE !")} </p> 
   <p> {React.string("Choisissez votre parcours : ")} </p></>;*/
 
+  let buttonDroits=
+  <>
+  <button
+    onClick={_ => ReasonReactRouter.push("/upgrade")}>
+    {React.string("Elevation de privileges")}
+  </button>
+  </>;
+
   let buttonDeconnection=
   <>
   <button
     onClick={_ => ReasonReactRouter.push("/connection")}>
     {React.string("Deconnection")}
+  </button>
+  </>;
+
+  let buttonAjoutCours=
+  <>
+  <button
+    onClick={_ => ReasonReactRouter.push("/addCours")}>
+    {React.string("Ajouter un cours")}
   </button>
   </>;
 
@@ -131,6 +147,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
 
   <>
     <div className="buttonDeconnection"> buttonDeconnection </div>
+    <div className="buttonPrivileges"> buttonDroits </div>
     //<div className="bienvenue"> welcome </div>
     <div>
       {switch (stateParcours) {
@@ -173,16 +190,19 @@ let (stateCours, setStateCours) = React.useState(() => []);
     </div>
 
     <div className="cours">
+    <div className="buttonAjoutCours"> buttonAjoutCours </div>
+
     {switch (stateCours) {
                | [] =>
-                 <div>
+                 <div className="leCours">
+    
                     <p> {React.string("Aucun cours pour le moment")} </p>
                   </div>
                | _ =>
                 (
                     React.array(Array.of_list(
                         List.map((c) =>
-                            <div>
+                            <div className="leCours">
                                 <p className="titre"> {React.string(Cours.getTitle(c))} </p>
                                 <p> {React.string(Cours.getDescription(c))} </p>
                                 <button
