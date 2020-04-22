@@ -35,8 +35,8 @@ let style = {j|
   .menuModules{
     border-top : 2px solid Gray;
     text-align : center;
-    margin-top : 10px;
-    padding-top : 30px;
+    margin-top : 30px;
+    padding-top : 50px;
     padding-bottom : 20px;
   }
   .menuModules button{
@@ -66,14 +66,14 @@ let style = {j|
 
   .parcoursList{
     height:110px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
 
-  .parcoursList .choseParcours{
+  .choseParcours{
     text-align:center;
     font-size: 24px;
     font-family: arial;
-    padding-top:30px;
+    padding-top:40px;
   }
 
   .parcoursList .parcours{

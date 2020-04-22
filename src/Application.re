@@ -20,9 +20,9 @@ let make = _ => {
         src="../src/logo.png"
         alt="Logo NoSchool"/>
 
-        <div> 
+        /*<div> 
           {React.string("Bienvenue !")}
-        </div>
+        </div> */
     </div>
     <div className="content"> innerContent </div>
   </>;

@@ -19,7 +19,6 @@ let style = {j|
     color: white;
   }
   .container {
-    margin: 12px 0px;
     width: 1080px;
     border-radius: 12px;
     font-family: sans-serif;
@@ -31,11 +30,10 @@ let style = {j|
     font-weight: bold;
   }
   .containerContent {
-    background-color: #FFF5EE;
+    background-color: white;
     border-radius: 12px 12px 12px 12px;
   }
-  .content {
-  }
+  
   .accueilConnection{
     text-align:center;
   }
