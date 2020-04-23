@@ -6,7 +6,7 @@ let reasonReactBlue = "#48a9dc";
 // constructing a string
 let style = {j|
   
-.form{
+form{
     margin-left:39.5%;
     margin-top:50px;
 }
@@ -72,11 +72,6 @@ let style = {j|
 
 ###################################################################################
 
-form .formCreate{
-    margin-left:39.5%;
-    margin-top:50px;
-}
-
 .createMail, .createMdp, .createPseudo, .createName, .createSurname{
     margin-bottom : 20px;
 }
@@ -85,6 +80,7 @@ form .formCreate{
     border-radius : 3px;
     width:20%;
     height:20px;
+    margin-bottom: 20px;
 }
 
 .createMail label, .createMdp label, .createPseudo label, .createName label, .createSurname label{
@@ -100,8 +96,24 @@ form .formCreate{
 	width:100px;
 	border:1px solid #ccc;
     margin-bottom : 20px;
-    cursor: pointer
+    cursor: pointer;
+}
 
+.submitCreate{
+    
+}
+
+.retour{
+    margin-left: 30%;
+    padding:6px 0 6px 0;
+	font:bold 13px Arial;
+	background:#f5f5f5;
+	color:#555;
+	border-radius:2px;
+	width:100px;
+	border:1px solid #ccc;
+    margin-bottom : 20px;
+    cursor: pointer;
 }
 
 |j};

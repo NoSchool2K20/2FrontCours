@@ -41,7 +41,6 @@ let make = (~title) => {
 
   let accueil = 
   <>
-    // Récupérer le forum
     <button
         onClick={_ => ReasonReactRouter.push("/")}>
         {React.string("Accueil")}

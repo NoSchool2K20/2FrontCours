@@ -37,7 +37,7 @@ let (state, setState) = React.useState(()=> {
 
 
 let form_authent = 
-<form className="form container card mt-1"
+<form className="formConnect container card mt-1"
     onSubmit={event => {
     ReactEvent.Form.preventDefault(event);
     setState(state => {
@@ -125,6 +125,7 @@ let form_authent =
     
 </form>;
 let form_create = 
+    
 <form className="formCreate container card mt-1"
     onSubmit={event => {
     ReactEvent.Form.preventDefault(event);
@@ -232,6 +233,11 @@ let form_create =
     <div className="submitCreate form-group text-right">
         <input type_="submit" value="Create account" className="btn btn-primary"/>
     </div>
+
+    <button className="retour"
+        onClick={_ => ReasonReactRouter.push("/connection")}>
+        {React.string("Retour")}
+      </button>
 
     {(state.error) ? <div className="form-text text-muted">"Something went wrong, please try again"->React.string</div> : ReasonReact.null}
 </form>;

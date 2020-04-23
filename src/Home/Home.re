@@ -36,6 +36,7 @@ let make = _ => {
 let (stateParcours, setStateParcours) = React.useState(() => []);
 let (stateModules, setStateModules) = React.useState(() => []);
 let (stateCours, setStateCours) = React.useState(() => []);
+  
 
   let decodeParcours= json =>
     json |> Parcourslist.fromJson
@@ -110,8 +111,12 @@ let (stateCours, setStateCours) = React.useState(() => []);
 
   // Render //
 
-  /*let welcome = <> <p> {React.string("BIENVENUE !")} </p> 
-  <p> {React.string("Choisissez votre parcours : ")} </p></>;*/
+/*let welcome=
+<>
+  <p>
+    {React.string(Dom.Storage.getItem("token", Dom.Storage.localStorage))}
+  </p>
+</>;*/
 
   let buttonDroits=
   <>
