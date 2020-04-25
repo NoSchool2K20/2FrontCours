@@ -76,9 +76,17 @@ let make = (~title) => {
       </button>
   </>;
 
+let getTok = () => {
+let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
+  switch (tok) {
+  | None => ""
+  | Some(token) => token
+  }
+};
+
   let forum =
   <>
-        <Forum token="" titleCours="" >
+        <Forum token=getTok() titleCours=title >
         </Forum>
   </>;
 

@@ -2,7 +2,6 @@
 [@bs.val] external document: Js.t({..}) = "document";
 [@bs.val] external fetch: string => Js.Promise.t('a) = "fetch";
 
-open ReasonUrql;
 open Parcours;
 open Parcourslist;
 open Module;
@@ -111,12 +110,21 @@ let (stateCours, setStateCours) = React.useState(() => []);
 
   // Render //
 
-/*let welcome=
+let getTok = () => {
+let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
+  switch (tok) {
+  | None => ""
+  | Some(token) => token
+  }
+};
+//let decoded = Json.Decode(getTok());
+//Js.log(JsonWebToken.(getTok()));
+let welcome=
 <>
   <p>
-    {React.string(Dom.Storage.getItem("token", Dom.Storage.localStorage))}
+    {React.string(getTok())}
   </p>
-</>;*/
+</>;
 
   let buttonDroits=
   <>
@@ -153,7 +161,7 @@ let (stateCours, setStateCours) = React.useState(() => []);
   <>
     <div className="buttonDeconnection"> buttonDeconnection </div>
     <div className="buttonPrivileges"> buttonDroits </div>
-    //<div className="bienvenue"> welcome </div>
+    <div className="bienvenue"> welcome </div>
     <div>
       {switch (stateParcours) {
        | [] =>
