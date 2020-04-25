@@ -117,7 +117,6 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
   | Some(token) => token
   }
 };
-//let decoded = Json.Decode(getTok());
 //Js.log(JsonWebToken.(getTok()));
 let welcome=
 <>
@@ -161,7 +160,7 @@ let welcome=
   <>
     <div className="buttonDeconnection"> buttonDeconnection </div>
     <div className="buttonPrivileges"> buttonDroits </div>
-    <div className="bienvenue"> welcome </div>
+    //<div className="bienvenue"> welcome </div>
     <div>
       {switch (stateParcours) {
        | [] =>

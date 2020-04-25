@@ -10,12 +10,22 @@ let style = {j|
     font-weight : bold;
     margin-top : 40px;
   }
-  .buttonDeconnection{
-    font-size: 17px;
+
+  .buttonPrivileges button{
+    font-size: 15px;
+    border-radius : 5px;
+    background-color : #F7F7F7;
+    padding : 5px;
+    float : right;
+  }
+
+  .buttonDeconnection button{
+    font-size: 15px;
     background-color : #F7F7F7;
     float:right;
     margin : 5px;
     border-radius : 3px;
+    height : 31px;
   }
 
   .parcours {
@@ -30,7 +40,6 @@ let style = {j|
     width : 15%;
     align-item:center;
     cursor: pointer;
-
   }
   .menuModules{
     border-top : 2px solid Gray;
@@ -46,6 +55,7 @@ let style = {j|
     padding-bottom : 8px;
     font-size : 14px;
     border-radius : 5px;
+    color : #514714;
   }
   .cours{
     border-radius : 5px;
@@ -62,6 +72,8 @@ let style = {j|
     margin : 5px;
     padding-bottom : 10px;
     background-color: rgb(224, 226, 229);
+    height : 153px;
+    margin-top : 15px;
   }
 
   .parcoursList{
@@ -73,18 +85,30 @@ let style = {j|
     text-align:center;
     font-size: 24px;
     font-family: arial;
-    padding-top:40px;
+    padding-top:45px;
+    color : black;
+    font-weight : bold;
   }
 
   .parcoursList .parcours{
     text-align: center;
     margin-top:30px;
     padding:10px;
+    color : #514714;
   }
 
-  .buttonPrivileges{
-    float:right;
-    margin : 5px;
-    border-radius : 3px;
+  .buttonAjoutCours button{
+    padding-left : 15px;
+    padding-right : 15px;
+    padding-top : 8px;
+    padding-bottom : 8px;
+    font-size : 14px;
+    border-radius : 5px;
+    background-color : #514714;
+    color : white;
+  }
+
+  .leCours .titre{
+    font-weight : bold;
   }
 |j};

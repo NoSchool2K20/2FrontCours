@@ -6,7 +6,6 @@ let reasonReactBlue = "#48a9dc";
 // constructing a string
 let style = {j|
   body {
-    background-color: rgb(224, 226, 229);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,13 +14,14 @@ let style = {j|
     cursor: pointer
   }
   .selected {
-    background-color: $reasonReactBlue;
     color: white;
   }
-  .container {
+
+.container {
     width: 1080px;
     border-radius: 12px;
     font-family: sans-serif;
+    background-color : #F7F7F7;
   }
   .containerTitle {
     background-color: rgb(242, 243, 245);
@@ -30,7 +30,7 @@ let style = {j|
     font-weight: bold;
   }
   .containerContent {
-    background-color: white;
+    background-color: #F7F7F7;
     border-radius: 12px 12px 12px 12px;
   }
   

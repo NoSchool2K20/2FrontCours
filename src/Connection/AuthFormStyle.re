@@ -48,7 +48,7 @@ form{
 	padding:6px 0 6px 0;
 	font:bold 13px Arial;
 	background:#f5f5f5;
-	color:#555;
+	color:#514714;
 	border-radius:2px;
 	width:100px;
 	border:1px solid #ccc;
@@ -60,10 +60,10 @@ form{
 .create{
     padding:6px 0 6px 0;
 	font:bold 13px Arial;
-	background:#478bf9;
+	background:#514714;
 	color:#fff;
 	border-radius:2px;
-	width:100px;
+	width:120px;
 	border:none;
     margin-left : 62px;
     cursor: pointer
