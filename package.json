@@ -24,6 +24,7 @@
   "dependencies": {
     "@glennsl/bs-json": "^5.0.2",
     "@material-ui/core": "^4.9.5",
+    "base64url": "^3.0.1",
     "bs-fetch": "^0.5.1",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
@@ -41,6 +42,7 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@baransu/graphql_ppx_re": "^0.6.4",
+    "@glennsl/bs-jest": "^0.5.1",
     "@storybook/addon-actions": "^5.3.13",
     "@storybook/addon-knobs": "^5.3.13",
     "@storybook/addon-links": "^5.3.13",

@@ -84,11 +84,11 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
   }
 };
 
-  let forum =
+  /*let forum =
   <>
         <Forum token=getTok() titleCours=title >
         </Forum>
-  </>;
+  </>;*/
 
   <>
     <div className="accueilButton"> accueil </div>

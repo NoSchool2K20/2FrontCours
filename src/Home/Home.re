@@ -100,9 +100,6 @@ let (stateCours, setStateCours) = React.useState(() => []);
       |> ignore
     );
 
-  // let message = Client.make(~url="", ~fetchOptions, ());
-
-  //let parcoursList = Array.make(~url="localhost", ~fetchOptions, ());
   React.useEffect0(() => {
     parcoursList();
     None;
@@ -219,7 +216,7 @@ let welcome=
                                 <p> {React.string(Cours.getDescription(c))} </p>
                                 <button
                                     onClick={ _=> ReasonReactRouter.push("/cours/" ++ Cours.getTitle(c))}>
-                                    {React.string("Accès au contenu")}
+                                    {React.string("Acces au contenu")}
                                 </button>
                             </div>
                             , stateCours)

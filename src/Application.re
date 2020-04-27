@@ -9,6 +9,7 @@ let make = _ => {
     | ["connection"] => <Connection /> 
     | ["cours", title] => <CoursPage title=title />
     | ["addCours"] => <AddCours />
+    //| ["forum"] => <Forum />
     | _ =>
       <p>
         <img src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" />
