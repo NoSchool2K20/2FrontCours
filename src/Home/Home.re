@@ -7,6 +7,7 @@ open Parcourslist;
 open Module;
 open Moduleslist;
 open Cours;
+open Base64Decoder;
 
 let style = document##createElement("style");
 document##head##appendChild(style);
@@ -118,7 +119,7 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
 let welcome=
 <>
   <p>
-    {React.string(getTok())}
+    //{React.string(Base64Decoder.Decoder.decodeToken(Base64Decoder.Decoder.decryptToken(getTok())).userRole)}
   </p>
 </>;
 
