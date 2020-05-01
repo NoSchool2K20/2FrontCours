@@ -1,13 +1,16 @@
 [@bs.val] external token: string = "process.env.GITHUB_TOKEN";
 [@bs.val] external document: Js.t({..}) = "document";
 [@bs.val] external fetch: string => Js.Promise.t('a) = "fetch";
+[@bs.val] external atob: string => string = "atob";
+[@bs.val] external btoa: string => string = "btoa";
+//[@bs.module "base64-url"] external decode: string => string = "decode";
+//[@bs.val] external decodeURIComponent: string => string = "decodeURIComponent";
 
 open Parcours;
 open Parcourslist;
 open Module;
 open Moduleslist;
 open Cours;
-open Base64Decoder;
 
 let style = document##createElement("style");
 document##head##appendChild(style);
@@ -119,7 +122,7 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
 let welcome=
 <>
   <p>
-    //{React.string(Base64Decoder.Decoder.decodeToken(Base64Decoder.Decoder.decryptToken(getTok())).userRole)}
+    //{React.string(getTok() |> decodeURIComponent)}
   </p>
 </>;
 
