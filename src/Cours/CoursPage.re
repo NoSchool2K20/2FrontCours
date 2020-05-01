@@ -8,13 +8,39 @@ let style = document##createElement("style");
 document##head##appendChild(style);
 style##innerHTML #= CoursStyle.style;
 
-[@react.component]
-let make = _ => {
+open Cours;
 
+[@react.component]
+let make = (~title) => {
+
+  let (stateCours, setStateCours) = React.useState(() => Cours.make("","",""));
+
+  let decodeCours= json =>
+    json |> Courslist.fromJson
+  ;
+
+  let getModuleCours = (title) =>
+    Js.Promise.(
+      Fetch.fetchWithInit("http://18.220.58.155:8080/cours/?title=" ++ title,
+      Fetch.RequestInit.make(~method_=Get, ()),)
+      |> then_(Fetch.Response.json)
+      |> then_(json  => {
+           let decoded = decodeCours(json);
+           setStateCours(_ => List.nth(decoded,0));
+           Js.Promise.resolve();
+         })
+      |> catch(_err
+           => Js.Promise.resolve())
+      |> ignore
+    );
+
+  React.useEffect0(() => {
+    getModuleCours(title);
+    None;
+  });
 
   let accueil = 
   <>
-    // Récupérer le forum
     <button
         onClick={_ => ReasonReactRouter.push("/")}>
         {React.string("Accueil")}
@@ -24,20 +50,20 @@ let make = _ => {
   let titre =
   <>
       // Récupérer le titre
-      <p> {React.string("TITRE DU COURS NUMERO 1")} </p>
+      <p> {React.string(title)} </p>
   </>;
 
   let description = 
   <>
   // Récupérer la description
-  <p> {React.string("Le but de ce cours est de pouvoir tester le CSS de NotOnlyASchool.")} </p>
+  <p> {React.string(Cours.getDescription(stateCours))} </p>
   </>;
 
   let video = 
   <>
     //Récupérer la video
     <iframe  width="425" height="344" 
-    src="http://www.youtube.com/embed/_-KEFeWLVtY" >
+    src=Cours.getVideoUrl(stateCours) >
     </iframe>
   </>;
 
@@ -50,12 +76,19 @@ let make = _ => {
       </button>
   </>;
 
-  let forum =
+let getTok = () => {
+let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
+  switch (tok) {
+  | None => ""
+  | Some(token) => token
+  }
+};
+
+  /*let forum =
   <>
-        <Forum name="Imani">
-          <div> {React.string("Effectively the child.")} </div>
+        <Forum token=getTok() titleCours=title >
         </Forum>
-  </>;
+  </>;*/
 
   <>
     <div className="accueilButton"> accueil </div>

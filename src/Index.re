@@ -20,7 +20,7 @@ let makeContainer = text => {
   let content = document##createElement("div");
   content##className #= "containerContent";
 
-  let () = container##appendChild(title);
+  //let () = container##appendChild(title);
   let () = container##appendChild(content);
   let () = document##body##appendChild(container);
 

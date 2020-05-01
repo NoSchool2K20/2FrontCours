@@ -10,27 +10,42 @@ let style = {j|
     font-weight : bold;
     margin-top : 40px;
   }
-  .buttonDeconnection{
-    font-size: 17px;
-    border-radius : 10px;
+
+  .buttonPrivileges button{
+    font-size: 15px;
+    border-radius : 5px;
+    background-color : #F7F7F7;
+    padding : 5px;
+    float : right;
+  }
+
+  .buttonDeconnection button{
+    font-size: 15px;
     background-color : #F7F7F7;
     float:right;
+    margin : 5px;
+    border-radius : 3px;
+    height : 31px;
   }
-  .parcours{
+
+  .parcours {
     text-align: center;
     margin-bottom : 20px;
-  }
-  .parcours button{
     padding : 25px;
     border-radius : 10px;
     margin : 7px;
     font-size : 20px;
+    background-color: gainsboro;
+    margin: 0 auto;
+    width : 15%;
+    align-item:center;
+    cursor: pointer;
   }
   .menuModules{
     border-top : 2px solid Gray;
     text-align : center;
-    margin-top : 10px;
-    padding-top : 30px;
+    margin-top : 30px;
+    padding-top : 50px;
     padding-bottom : 20px;
   }
   .menuModules button{
@@ -40,6 +55,7 @@ let style = {j|
     padding-bottom : 8px;
     font-size : 14px;
     border-radius : 5px;
+    color : #514714;
   }
   .cours{
     border-radius : 5px;
@@ -48,7 +64,7 @@ let style = {j|
     border-bottom : 10px;
     margin : 10px;
   }
-  .cours div{
+  .cours .leCours{
     display : inline-block;
     border : 1px solid Gray;
     width : 20%;
@@ -56,6 +72,43 @@ let style = {j|
     margin : 5px;
     padding-bottom : 10px;
     background-color: rgb(224, 226, 229);
+    height : 153px;
+    margin-top : 15px;
+  }
 
+  .parcoursList{
+    height:110px;
+    margin-bottom: 50px;
+  }
+
+  .choseParcours{
+    text-align:center;
+    font-size: 24px;
+    font-family: arial;
+    padding-top:45px;
+    color : black;
+    font-weight : bold;
+  }
+
+  .parcoursList .parcours{
+    text-align: center;
+    margin-top:30px;
+    padding:10px;
+    color : #514714;
+  }
+
+  .buttonAjoutCours button{
+    padding-left : 15px;
+    padding-right : 15px;
+    padding-top : 8px;
+    padding-bottom : 8px;
+    font-size : 14px;
+    border-radius : 5px;
+    background-color : #514714;
+    color : white;
+  }
+
+  .leCours .titre{
+    font-weight : bold;
   }
 |j};

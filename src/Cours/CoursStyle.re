@@ -12,6 +12,7 @@ let style = {j|
     font-weight:bold;
     margin-bottom : 4%;
     margin-top : 50px;
+    font-size: 20px;
   }
   .descriptionCours{
     margin-bottom:2%;
@@ -37,7 +38,6 @@ let style = {j|
     margin-bottom : 10px;
   }
   .accueilButton{
-    border-bottom : 1px solid black;
     margin-bottom : 10px;
   }
 |j};
