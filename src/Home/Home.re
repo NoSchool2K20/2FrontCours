@@ -3,8 +3,7 @@
 [@bs.val] external fetch: string => Js.Promise.t('a) = "fetch";
 [@bs.val] external atob: string => string = "atob";
 [@bs.val] external btoa: string => string = "btoa";
-//[@bs.module "base64-url"] external decode: string => string = "decode";
-//[@bs.val] external decodeURIComponent: string => string = "decodeURIComponent";
+[@bs.module "js-base64"] external decode: string => string = "decode";
 
 open Parcours;
 open Parcourslist;
@@ -118,11 +117,18 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
   | Some(token) => token
   }
 };
+
+let deco = () => {
+  let ls = Dom.Storage.localStorage;
+  Dom.Storage.setItem("token","", ls); 
+  ReasonReactRouter.push("/connection")
+  Js.log(Dom.Storage.getItem("token"));
+}
 //Js.log(JsonWebToken.(getTok()));
 let welcome=
 <>
   <p>
-    //{React.string(getTok() |> decodeURIComponent)}
+    //{React.string(getTok() |> decode)}
   </p>
 </>;
 
@@ -137,7 +143,7 @@ let welcome=
   let buttonDeconnection=
   <>
   <button
-    onClick={_ => ReasonReactRouter.push("/connection")}>
+    onClick={_ => deco()}>
     {React.string("Deconnection")}
   </button>
   </>;
@@ -161,7 +167,7 @@ let welcome=
   <>
     <div className="buttonDeconnection"> buttonDeconnection </div>
     <div className="buttonPrivileges"> buttonDroits </div>
-    //<div className="bienvenue"> welcome </div>
+    <div className="bienvenue"> welcome </div>
     <div>
       {switch (stateParcours) {
        | [] =>
@@ -192,7 +198,7 @@ let welcome=
             (
                 React.array(Array.of_list(
                     List.map((m) =>
-                        <button
+                        <button name="boutonModule"
                             onClick={(_) => {getModuleCours(Modules.getTitle(m));();}}>
                             {React.string(Modules.getTitle(m))}
                         </button>
