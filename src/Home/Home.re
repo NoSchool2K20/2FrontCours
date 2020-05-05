@@ -1,22 +1,21 @@
 [@bs.val] external token: string = "process.env.GITHUB_TOKEN";
 [@bs.val] external document: Js.t({..}) = "document";
 [@bs.val] external fetch: string => Js.Promise.t('a) = "fetch";
-[@bs.val] external atob: string => string = "atob";
+[@bs.val] external atob: string => Js.String.t = "atob";
 [@bs.val] external btoa: string => string = "btoa";
-[@bs.module "js-base64"] external decode: string => string = "decode";
+
+[@bs.module "base-64"] external decode: string => Js.String.t = "decode";
 
 open Parcours;
 open Parcourslist;
 open Module;
 open Moduleslist;
 open Cours;
+open User;
 
 let style = document##createElement("style");
 document##head##appendChild(style);
 style##innerHTML #= HomeStyle.style;
-
-//[@bs.deriving jsConverter]
-//type modules = {title: string};
 
 [@bs.deriving abstract]
 type jsProps = {
@@ -25,12 +24,6 @@ type jsProps = {
   modules: Moduleslist.t,
   parcours: Parcourslist.t,
   cours: Courslist.t,
-
-  //    /* `type` is reserved in Reason. use `type_` and make it still compile to the
-  //       JS key `type` */
-  //    [@bs.as "type"]
-  //    type_: string,
-  //    value: Js.nullable(int),
 };
 
 [@react.component]
@@ -52,10 +45,26 @@ let (stateCours, setStateCours) = React.useState(() => []);
     json |> Courslist.fromJson
   ;
 
+  let getTok = () => {
+let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
+  switch (tok) {
+  | None => ""
+  | Some(token) => token
+  }
+};
+let body = getTok() |> Js.String.split(".") |> Js.Array.unsafe_get(_,1)
+let jsonbody = try (Js.Json.parseExn(atob(body))) {
+  | Not_found => Js.Json.null
+  };
+
+let decodeToken=json =>
+  json |> User.fromJson
+
   let getModuleCours = (title) =>
     Js.Promise.(
       Fetch.fetchWithInit("http://18.220.58.155:8080/cours/?module=" ++ title,
-      Fetch.RequestInit.make(~method_=Get, ()),)
+      Fetch.RequestInit.make(~method_=Get,
+        ~headers=Fetch.HeadersInit.make({"Authorization": "Bearer " ++ getTok()}),()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
            let decoded = decodeCours(json);
@@ -71,7 +80,8 @@ let (stateCours, setStateCours) = React.useState(() => []);
   let getParcoursModules = (title) =>
     Js.Promise.(
       Fetch.fetchWithInit("http://18.220.58.155:8080/module/?parcours=" ++ title,
-      Fetch.RequestInit.make(~method_=Get, ()),)
+      Fetch.RequestInit.make(~method_=Get,
+        ~headers=Fetch.HeadersInit.make({"Authorization": "Bearer " ++ getTok()}),()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
            let decoded = decodeModules(json);
@@ -89,7 +99,8 @@ let (stateCours, setStateCours) = React.useState(() => []);
   let parcoursList = () =>
     Js.Promise.(
       Fetch.fetchWithInit("http://18.220.58.155:8080/parcours",
-      Fetch.RequestInit.make(~method_=Get, ()),)
+      Fetch.RequestInit.make(~method_=Get, 
+        ~headers=Fetch.HeadersInit.make({"Authorization": "Bearer " ++ getTok()}),()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
            let decoded = decodeParcours(json);
@@ -110,32 +121,24 @@ let (stateCours, setStateCours) = React.useState(() => []);
 
   // Render //
 
-let getTok = () => {
-let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
-  switch (tok) {
-  | None => ""
-  | Some(token) => token
-  }
-};
-
 let deco = () => {
   let ls = Dom.Storage.localStorage;
   Dom.Storage.setItem("token","", ls); 
   ReasonReactRouter.push("/connection")
-  Js.log(Dom.Storage.getItem("token"));
 }
-//Js.log(JsonWebToken.(getTok()));
+
 let welcome=
 <>
   <p>
-    //{React.string(getTok() |> decode)}
+    //{React.string(body |> atob)}
+    {React.string("Welcome " ++ User.getName(decodeToken(jsonbody)))}
   </p>
 </>;
 
   let buttonDroits=
   <>
   <button
-    onClick={_ => ReasonReactRouter.push("/upgrade")}>
+    onClick={_ => ReasonReactRouter.push("/askPrivileges")}>
     {React.string("Elevation de privileges")}
   </button>
   </>;
@@ -156,17 +159,16 @@ let welcome=
   </button>
   </>;
 
-  //Récupérer les modules ici
-  /*let make = children =>
-    ReasonReact.wrapJsForReason(
-      ~reactClass=myJSReactClass,
-      ~props=jsProps(~className="module", ~modules=stateModules),
-      children,
-    );*/
-
   <>
     <div className="buttonDeconnection"> buttonDeconnection </div>
-    <div className="buttonPrivileges"> buttonDroits </div>
+    <div className="buttonPrivileges"> 
+    {switch (User.getUserRole(decodeToken(jsonbody))) {
+           | "Nouveau"=>
+             buttonDroits
+           | _ =>
+            <p></p>
+           }}
+    </div>
     <div className="bienvenue"> welcome </div>
     <div>
       {switch (stateParcours) {
@@ -209,7 +211,14 @@ let welcome=
     </div>
 
     <div className="cours">
-    <div className="buttonAjoutCours"> buttonAjoutCours </div>
+    <div className="buttonAjoutCours"> 
+    {switch (User.getUserRole(decodeToken(jsonbody))) {
+           | "Professeur" =>
+             buttonAjoutCours
+           | _ =>
+            <p></p>
+           }}
+    </div>
 
     {switch (stateCours) {
                | [] =>

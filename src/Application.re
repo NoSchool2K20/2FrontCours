@@ -4,7 +4,6 @@
 let make = _ => {
   let url = ReasonReactRouter.useUrl();
   let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
-  Js.log(tok);
    let path = switch (tok) {
     | None => ["connection"]
     | Some("") => ["connection"]
@@ -17,7 +16,8 @@ let make = _ => {
     | ["connection"] => <Connection /> 
     | ["cours", title] => <CoursPage title=title />
     | ["addCours"] => <AddCours />
-    //| ["forum"] => <Forum />
+    | ["askPrivileges"] => <AskPrivileges />
+    | ["forum", token, titleCours] => <Forum token=token titleCours=titleCours/>
     | _ =>
       <p>
         <img src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" />
