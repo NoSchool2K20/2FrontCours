@@ -17,6 +17,7 @@ let make = _ => {
     | ["cours", title] => <CoursPage title=title />
     | ["addCours"] => <AddCours />
     | ["askPrivileges"] => <AskPrivileges />
+    | ["acceptPrivileges"] => <AcceptPrivilegesForm />
     | ["forum", token, titleCours] => <Forum token=token titleCours=titleCours/>
     | _ =>
       <p>

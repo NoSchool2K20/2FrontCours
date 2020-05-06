@@ -143,6 +143,14 @@ let welcome=
   </button>
   </>;
 
+   let acceptDroits=
+  <>
+  <button
+    onClick={_ => ReasonReactRouter.push("/acceptPrivileges")}>
+    {React.string("Demandes d'elevation")}
+  </button>
+  </>;
+
   let buttonDeconnection=
   <>
   <button
@@ -159,9 +167,19 @@ let welcome=
   </button>
   </>;
 
+  /*-------------------------------------------------------------------------*/
+
+let all = 
   <>
-    <div className="buttonDeconnection"> buttonDeconnection </div>
-    <div className="buttonPrivileges"> 
+  <div className="buttons">
+    buttonDeconnection
+    {switch (User.getUserRole(decodeToken(jsonbody))) {
+           | "Administrateur"=>
+             acceptDroits
+           | _ =>
+            <p></p>
+           }}
+
     {switch (User.getUserRole(decodeToken(jsonbody))) {
            | "Nouveau"=>
              buttonDroits
@@ -244,4 +262,17 @@ let welcome=
     }}
     </div>
   </>;
+
+  <>
+  {switch (User.getUserRole(decodeToken(jsonbody))) {
+               | "Nouveau" =>
+               <div className="buttonNouveau">
+                 buttonDroits
+                 buttonDeconnection
+                <p className="accueilNouveau"> {React.string("Vous devez faire une demande d'élévation de privilèges afin d'accéder au contenu du site !")} </p>
+                </div>
+               | _ =>
+                all
+    }}
+  </>
 };

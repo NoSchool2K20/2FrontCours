@@ -8,7 +8,21 @@ let style = {j|
   .bienvenue{
     text-align : center;
     font-weight : bold;
-    margin-top : 40px;
+    padding-top : 55px;
+  }
+
+  .accueilNouveau{
+    padding-top:70px;
+    text-align : center;
+  }
+  .buttonNouveau button{
+    font-size: 15px;
+    background-color : #F7F7F7;
+    float:right;
+    margin : 5px;
+    border-radius : 3px;
+    height : 31px;
+    display:block;
   }
 
   .buttonPrivileges button{
@@ -20,6 +34,24 @@ let style = {j|
   }
 
   .buttonDeconnection button{
+    font-size: 15px;
+    background-color : #F7F7F7;
+    float:right;
+    margin : 5px;
+    border-radius : 3px;
+    height : 31px;
+  }
+
+  .acceptPrivileges button{
+    font-size: 15px;
+    background-color : #F7F7F7;
+    float:right;
+    margin : 5px;
+    border-radius : 3px;
+    height : 31px;
+  }
+
+  .buttons button{
     font-size: 15px;
     background-color : #F7F7F7;
     float:right;
