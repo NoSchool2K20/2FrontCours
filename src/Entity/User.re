@@ -4,7 +4,7 @@ module User: {
   let modifyUserRole: (string, t) => t;
   let getEmail: t => string;
   let getPseudo: t => string;
-  let getPassword: t => string;
+  //let getPassword: t => string;
   let getName: t => string;
   let getSurname: t => string;
   let getUserRole: t => string;
@@ -17,7 +17,7 @@ module User: {
   type t = {
     email: string,
     pseudo: string,
-    password: string,
+    //password: string,
     name: string,
     surname: string,
     userRole: string,
@@ -25,7 +25,7 @@ module User: {
 
   // create a value of the type Users.t
   let make = (email, pseudo, password, name, surname, userRole) => {
-    {email, pseudo, password, name, surname, userRole}
+    {email, pseudo, /*password,*/ name, surname, userRole}
   }
 
 
@@ -36,7 +36,7 @@ module User: {
   // while it is a good practice for accessing records members, like for object members
   let getEmail = user => user.email;
   let getPseudo = user => user.pseudo;
-  let getPassword = user => user.password;
+  //let getPassword = user => user.password;
   let getName = user => user.name;
   let getSurname = user => user.surname;
   let getUserRole = user => user.userRole;
@@ -47,7 +47,7 @@ module User: {
     Json.Decode.{
       email: json |> field("email", string),
       pseudo: json |> field("pseudo", string),
-      password: json |> field("password", string),
+      //password: json |> field("password", string),
       name: json |> field("name", string),
       surname: json |> field("surname", string),
       userRole: json |> field("userRole", string),
@@ -66,7 +66,7 @@ module User: {
       object_([
         ("email", string(user.email)),
         ("pseudo", string(user.pseudo)),
-        ("password", string(user.password)),
+        //("password", string(user.password)),
         ("name", string(user.name)),
         ("surname", string(user.surname)),
         ("userRole", string(user.userRole)),
