@@ -56,7 +56,7 @@ Les contrats et la technologie des interfaces est un entrant que devra vous four
 
 ## <a id="installation"></a>Installation du projet en local
 ### Environnement requis
-L'application est utilisable sur un système à noyaux UNIX (Linux/Mac) ou sur un Windows disposant de WSL. L'installation de node et de ses dépendances (npm notamment) est un impératif. Pour asssurer un fonctionnement complet du programme, nousrequiérons l'utilisation de Node.js version 13.
+L'application est utilisable sur un système à noyaux UNIX (Linux/Mac) ou sur un Windows disposant de WSL. L'installation de node et de ses dépendances (npm notamment) est un impératif. Pour asssurer un fonctionnement complet du programme, nous requiérons l'utilisation de Node.js version 13.
 
 ### Commande à éxécuter pour le déploiement en local
 Il faut d'abord cloner le dépôt:
