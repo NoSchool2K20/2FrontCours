@@ -67,6 +67,7 @@ let decodeToken=json =>
         ~headers=Fetch.HeadersInit.make({"Authorization": "Bearer " ++ getTok()}),()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
+        Js.log(json);
            let decoded = decodeCours(json);
            setStateCours(_ => List.append([], decoded));
            Js.Promise.resolve();
@@ -195,8 +196,9 @@ let all =
            {React.string("Aucun parcours pour le moment")}
          </div>
        | _ =>
-        <div className="parcoursList">
+        <div>
         <div className="choseParcours">  {React.string("Nos parcours")} </div>
+        <div className="parcoursList">
               (
                 React.array(Array.of_list(
                     List.map((p) =>
@@ -204,6 +206,7 @@ let all =
                     , stateParcours)
                 ))
               )
+        </div>
         </div>
        }}
     </div>

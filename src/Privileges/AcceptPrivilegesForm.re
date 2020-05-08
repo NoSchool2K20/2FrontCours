@@ -34,7 +34,9 @@ let accueil =
         ~headers=Fetch.HeadersInit.make({"Authorization": "Bearer " ++ getTok()}),()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
+        Js.log(json);
            let decoded = decodeAssignment(json);
+           Js.log(decoded);
            setStateAssignment(_ => List.append([], decoded));
            Js.Promise.resolve();
          })

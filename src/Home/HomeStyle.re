@@ -70,9 +70,16 @@ let style = {j|
     background-color: gainsboro;
     margin: 0 auto;
     width : 15%;
-    align-item:center;
     cursor: pointer;
+    display: inline-block;
+    align-items : center;
+    margin : 5px;
   }
+
+  .parcoursList{
+    text-align:center;
+  }
+
   .menuModules{
     border-top : 2px solid Gray;
     text-align : center;

@@ -15,6 +15,7 @@ open User;
 [@react.component]
 let make = (~title) => {
 
+  let (stateForum, setStateForum) = React.useState(() => false);
   let (stateCours, setStateCours) = React.useState(() => Cours.make("","",""));
 
   let decodeCours= json =>
@@ -28,6 +29,13 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
   | Some(token) => token
   }
 };
+let body = getTok() |> Js.String.split(".") |> Js.Array.unsafe_get(_,1)
+let jsonbody = try (Js.Json.parseExn(atob(body))) {
+  | Not_found => Js.Json.null
+  };
+
+let decodeToken=json =>
+  json |> User.fromJson
 
   let getModuleCours = (title) =>
     Js.Promise.(
@@ -82,7 +90,7 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
   <>
     // Récupérer le forum
     <button
-        onClick={_ => ReasonReactRouter.push("/")}>
+        onClick={_ => setStateForum(_ => true);}>
         {React.string("Forum")}
       </button>
   </>;
@@ -95,13 +103,6 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
   }
 };
 
-let body = getTok() |> Js.String.split(".") |> Js.Array.unsafe_get(_,1)
-let jsonbody = try (Js.Json.parseExn(atob(body))) {
-  | Not_found => Js.Json.null
-  };
-
-let decodeToken=json =>
-  json |> User.fromJson
 
   let forum =
   <>
@@ -115,6 +116,12 @@ let decodeToken=json =>
     <div className="titreCours"> titre </div>
     <div className="descriptionCours"> description </div>
     <div className="videoCours">video</div>
-    <div className="forum">forum</div> 
+     
+     {switch (stateForum) {
+           | true =>
+             forum
+           | _ =>
+            <p> </p>
+           }}
   </>;
 };
