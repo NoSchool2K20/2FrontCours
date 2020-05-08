@@ -4,6 +4,7 @@
 1. [Accès au wiki de l'équipe](#wiki)
 2. [Contexte global](#context)
 3. [Le projet «Front-end cours»](#project)
+4. [Installation du projet en local](#installation)
 
 ## <a id="wiki"></a>Accès au wiki "synthèse" de l'équipe
 [Le wiki est accessible par ici](https://github.com/NoSchool2K20/2FrontCours/wiki)
@@ -52,3 +53,41 @@ Le composant de forum est réalisé par le projet « service forum », les modal
 
 ### Interface
 Les contrats et la technologie des interfaces est un entrant que devra vous fournir l’équipe projet «back-end»
+
+## <a id="installation"></a>Installation du projet en local
+### Environnement requis
+L'application est utilisable sur un système à noyaux UNIX (Linux/Mac) ou sur un Windows disposant de WSL. L'installation de node et de ses dépendances (npm notamment) est un impératif. Pour asssurer un fonctionnement complet du programme, nousrequiérons l'utilisation de Node.js version 13.
+
+### Commande à éxécuter pour le déploiement en local
+Il faut d'abord cloner le dépôt:
+  - Soit par HTTPS
+```bash
+git clone 
+```
+  - Soit par SSH
+```bash
+git clone
+```
+
+Ensuite, dans le répertoire git cloné, jouer la commande
+```bash
+npm install
+```
+pour installer les dépendances du projet
+
+<br/>Enfin, jouer la commande
+```bash
+npm run build
+```
+Pour construire une architecture fonctionnelle du projet.
+
+### Lancement en mode serveur
+```bash
+npm run server
+```
+Le serveur est à ce moment là en écoute sur le port
+### Lancement en mode développement
+```bash
+npm run dev
+```
+Le serveur est alors en écoute sur le port 8000
