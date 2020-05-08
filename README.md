@@ -62,11 +62,11 @@ L'application est utilisable sur un système à noyaux UNIX (Linux/Mac) ou sur u
 Il faut d'abord cloner le dépôt:
   - Soit par HTTPS
 ```bash
-git clone 
+git clone https://github.com/NoSchool2K20/2FrontCours.git
 ```
   - Soit par SSH
 ```bash
-git clone
+git clone git@github.com:NoSchool2K20/2FrontCours.git
 ```
 
 Ensuite, dans le répertoire git cloné, jouer la commande
@@ -85,7 +85,7 @@ Pour construire une architecture fonctionnelle du projet.
 ```bash
 npm run server
 ```
-Le serveur est à ce moment là en écoute sur le port
+Le serveur est à ce moment là en écoute sur le port 8000
 ### Lancement en mode développement
 ```bash
 npm run dev
