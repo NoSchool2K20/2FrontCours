@@ -67,7 +67,6 @@ let decodeToken=json =>
         ~headers=Fetch.HeadersInit.make({"Authorization": "Bearer " ++ getTok()}),()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
-        Js.log(json);
            let decoded = decodeCours(json);
            setStateCours(_ => List.append([], decoded));
            Js.Promise.resolve();
@@ -138,7 +137,7 @@ let welcome=
 
   let buttonDroits=
   <>
-  <button
+  <button className="buttonDroits"
     onClick={_ => ReasonReactRouter.push("/askPrivileges")}>
     {React.string("Elevation de privileges")}
   </button>
@@ -146,7 +145,7 @@ let welcome=
 
    let acceptDroits=
   <>
-  <button
+  <button className="consultElevations"
     onClick={_ => ReasonReactRouter.push("/acceptPrivileges")}>
     {React.string("Demandes d'elevation")}
   </button>
@@ -154,7 +153,7 @@ let welcome=
 
   let buttonDeconnection=
   <>
-  <button
+  <button className="deconnection"
     onClick={_ => deco()}>
     {React.string("Deconnection")}
   </button>

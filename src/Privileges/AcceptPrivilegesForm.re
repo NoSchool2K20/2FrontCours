@@ -2,11 +2,16 @@ open AssignmentRequest;
 open AssignmentRequests;
 open User;
 [@bs.val] external atob: string => Js.String.t = "atob";
+[@bs.deriving abstract]
+type jsProps = {
 
+  assignments: AssignmentRequests.t,
+};
 [@react.component]
 let make = _ => {
 let (stateAssignment, setStateAssignment) = React.useState(() => []);
-  
+let (stateAccepted, setStateAccepted) = React.useState(() => false);
+
 let decodeAssignment= json =>
     json |> AssignmentRequests.fromJson
   ;
@@ -34,9 +39,7 @@ let accueil =
         ~headers=Fetch.HeadersInit.make({"Authorization": "Bearer " ++ getTok()}),()),)
       |> then_(Fetch.Response.json)
       |> then_(json  => {
-        Js.log(json);
            let decoded = decodeAssignment(json);
-           Js.log(decoded);
            setStateAssignment(_ => List.append([], decoded));
            Js.Promise.resolve();
          })
@@ -45,6 +48,51 @@ let accueil =
            => Js.Promise.resolve())
       |> ignore
     );
+
+let acceptElevation = (assignmentRequestId) =>
+    Js.Promise.(
+            Fetch.fetchWithInit(
+                "https://noschool-authentication.cleverapps.io/assignmentRequest/" ++ assignmentRequestId ++ "/accept",
+                Fetch.RequestInit.make(
+                    ~method_=Post,
+                    ~headers=Fetch.HeadersInit.make({"Content-Type":"application/json", "Authorization": "Bearer " ++ getTok()}),
+                    ()
+                )
+            )
+            |> then_(Fetch.Response.json)
+            |> then_(_ => {
+                ReasonReactRouter.push("/acceptPrivileges");
+                Js.Promise.resolve();
+            })
+            |> catch(_ => {
+                Js.Promise.resolve();
+            })
+        );
+
+ React.useEffect0(() => {
+    getAllElevations();
+    None;
+  });
+
+  let refuseElevation = (assignmentRequestId) =>
+    Js.Promise.(
+            Fetch.fetchWithInit(
+                "https://noschool-authentication.cleverapps.io/assignmentRequest/" ++ assignmentRequestId ++ "/decline",
+                Fetch.RequestInit.make(
+                    ~method_=Post,
+                    ~headers=Fetch.HeadersInit.make({"Content-Type":"application/json", "Authorization": "Bearer " ++ getTok()}),
+                    ()
+                )
+            )
+            |> then_(Fetch.Response.json)
+            |> then_(_ => {
+                ReasonReactRouter.push("/acceptPrivileges");
+                Js.Promise.resolve();
+            })
+            |> catch(_ => {
+                Js.Promise.resolve();
+            })
+        );
 
  React.useEffect0(() => {
     getAllElevations();
@@ -66,7 +114,14 @@ let accueil =
               (
                 React.array(Array.of_list(
                     List.map((p) =>
-                    <div className="elevation" onClick={(_) => {getAllElevations();();}}> {React.string(AssignmentRequest.getEmailUserForAssignment(p))} </div>
+                    <div className="elevation"> {React.string(AssignmentRequest.getEmailUserForAssignment(p))} 
+                    <button onClick={(_) => {acceptElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
+                          {React.string("Accepter")}
+                    </button>
+                    <button onClick={(_) => {refuseElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
+                          {React.string("Refuser")}
+                    </button>
+                    </div>
                     , stateAssignment)
                 ))
               )

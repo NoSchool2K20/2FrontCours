@@ -4,14 +4,12 @@
 // constructing a string
 let style = {j|
 .content-main {
-
     overflow-y: scroll;
     float:right;
     clear:right;
     height: 570px;
-    width: 100%;    
-
-margin-top: 5%;
+    width: 100%;
+    margin-top: 5%;
 }
 .message {
     marginTop:10px;
@@ -32,6 +30,8 @@ margin-top: 5%;
     border:none;
     resize:none;
 }
-
+.info{
+    padding-top: 5%;
+}
 
 |j};

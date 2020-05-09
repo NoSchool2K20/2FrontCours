@@ -28,6 +28,7 @@ margin-right: 2%;
       color:grey;
       font-size: 0.6em;
     font-weight: bold;
+    margin-left: 2%;
   }
   .likes {
     margin-left: auto;
@@ -55,13 +56,9 @@ margin-right: 2%;
   }
 .texte{
   width: 100%;
-
-height: 80%;
-
-border: none;
-
-resize: none;
-
-margin-left: 3%;
+  height: 80%;
+  border: none;
+  resize: none;
+  margin-left: 3%;
 }
 |j};

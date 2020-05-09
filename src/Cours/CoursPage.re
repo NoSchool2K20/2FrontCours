@@ -69,7 +69,7 @@ let decodeToken=json =>
   let titre =
   <>
       // Récupérer le titre
-      <p> {React.string(title)} </p>
+      <p> {React.string(Cours.getTitle(stateCours))} </p>
   </>;
 
   let description = 
@@ -106,7 +106,7 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
 
   let forum =
   <>
-        <Forum token=User.getName(decodeToken(jsonbody)) titleCours=title >
+        <Forum token=User.getName(decodeToken(jsonbody)) titleCours=Cours.getTitle(stateCours) >
         </Forum>
   </>;
 

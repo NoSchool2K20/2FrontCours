@@ -23,6 +23,22 @@ let make = (~cours, ~user) => {
       |> then_(Fetch.Response.json)
       |> then_(json  => {
            setStateMessage(_ => List.append(stateMessage, decodeMessages(json)));
+           Js.log(stateMessage);
+           Js.Promise.resolve();
+         })
+      |> catch(_err
+           => Js.Promise.resolve())
+      |> ignore
+    );
+
+    let getMessagesUpdateLists = (cours, user) =>
+    Js.Promise.(
+      Fetch.fetchWithInit("https://service-forum.cleverapps.io/message?cours=" ++ cours ++ "&userId=" ++ user,
+      Fetch.RequestInit.make(~method_=Get, ()),)
+      |> then_(Fetch.Response.json)
+      |> then_(json  => {
+           setStateMessage(_ => decodeMessages(json));
+           Js.log(stateMessage);
            Js.Promise.resolve();
          })
       |> catch(_err
@@ -35,7 +51,7 @@ let make = (~cours, ~user) => {
       None;
     });
 
-    // INPUT //
+ 
 
     let onChange = (e: ReactEvent.Form.t): unit => {
       let value = e->ReactEvent.Form.target##value;
@@ -61,28 +77,48 @@ let make = (~cours, ~user) => {
         |> then_(Fetch.Response.json)
         |> then_(_ => {
               setName(_ => "");
-              ReasonReactRouter.push("");
+              getMessagesUpdateLists(cours, user);
               Js.Promise.resolve();
           })
-        |> ignore       
+         
+        |> ignore     
       )
-    
+       
     };
-  // Render //
+
+
   <div> 
     <form className="message" onSubmit>
       <textarea className="texte" placeholder="Votre message" type_="text"name="name" value=name onChange/>
-      <button type_="submit">{ReasonReact.string("Envoyer")} </button>
+      <button className="envoyer" type_="submit">{ReasonReact.string("Envoyer")} </button>
       </form>
       
   {switch (stateMessage) {
     | [] =>
       <div>
-
-         <p> {React.string("Aucun message, postez-en un!")} </p>
+    <br></br>
+         <p className="info"> {React.string("Aucun message, postez-en un!")} </p>
        </div>
     | _ =>
     <div  className="content-main" onChange>
+    <button  className="raffraichir" onClick={
+      ev => {
+        Js.Promise.(
+          Fetch.fetchWithInit("https://service-forum.cleverapps.io/message?cours=" ++ cours ++ "&userId=" ++ user,
+          Fetch.RequestInit.make(~method_=Get, ()),)
+          |> then_(Fetch.Response.json)
+          |> then_(json  => {
+               setStateMessage(_ => decodeMessages(json));
+               Js.log(stateMessage);
+               Js.Promise.resolve();
+             })
+          |> catch(_err
+               => Js.Promise.resolve())
+          |> ignore
+        );
+      }
+    }>
+    {ReasonReact.string("raffraichir")} </button>
      (
       React.array(Array.of_list(
           List.map((p) =>
@@ -101,9 +137,3 @@ let make = (~cours, ~user) => {
   </div>
 
 };
-
-          /*<div > 
-            <p>{React.string(Messages.getTexte(p))}</p>
-            <p> {React.string(Messages.getAuteur(p))} </p>
-          </div>
-          */
