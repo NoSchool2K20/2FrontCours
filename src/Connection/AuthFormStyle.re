@@ -6,7 +6,7 @@ let reasonReactBlue = "#48a9dc";
 // constructing a string
 let style = {j|
   
-form{
+.formCreate{
     margin-left:39.5%;
     margin-top:50px;
 }

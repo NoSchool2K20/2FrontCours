@@ -1,84 +1,160 @@
+before(() => {
+  cy.clearLocalStorageSnapshot();
+});
+
+beforeEach(() => {
+  cy.restoreLocalStorage();
+});
+
+afterEach(() => {
+  cy.saveLocalStorage();
+});
+
 describe('Création de compte / Connection', function() {
-    it('Creation du compte', function() {
+    /*it('Creation du compte', function() {
       cy.visit('http://localhost:8000/connection')
+      cy.wait(500)
       cy.get('.create').click()
-      cy.get('.createMail > input').click().type('lea@lea.fr')
+      cy.wait(500)
+      cy.get('.createMail > input').click().type('test@cypress.fr')
       cy.get('.createMdp > input').click().type('testmdp')
-      cy.get('.createPseudo > input').click().type('Lea')
-      cy.get('.createName > input').click().type('V')
-      cy.get('.createSurname > input').click().type('Lea')
+      cy.get('.createPseudo > input').click().type('Test')
+      cy.get('.createName > input').click().type('Cypress')
+      cy.get('.createSurname > input').click().type('Test')
       cy.get('.submitCreate > input[type="submit"]').click()
-      cy.get('.FormulaireConnection').should('exists')
-    })
+      cy.wait(500)
+      cy.get('.FormulaireConnection').should('exist')
+    })*/
     it('Connection avec le compte créé', function() {
+      cy.visit('http://localhost:8000/connection')
+      cy.wait(500)
       cy.get('input[name="email"]').click().type('lea@lea.fr')
-      cy.get('input[name="password]').click().type('testmdp')
+      cy.get('input[name="password"]').click().type('testmdp')
       cy.get('.login > input[type="submit"]').click()
       cy.location('pathname').should('eq', '/')
     })
   })
 
+  describe('Pas de contenu avec le profil nouveau', function() {
+  it('Affichage du message', function() {
+    cy.wait(500)
+    cy.get('.accueilNouveau').should('exist')
+  })
+  it('Demande d\'élévation de pivilèges', function() {
+    cy.get('.buttonDroits').click()
+    cy.get('.prof > input').click()
+    cy.get('.elevation > input').click()
+    cy.location('pathname').should('eq', '/')
+  })
+  })
+
+  // TESTS PROFIL ETUDIANT
+  describe('Connection profil nouveau', function() {
+    it('Deconnexion puis reconnexion ', function() {
+      cy.get('.deconnection').click()
+      cy.wait(500)
+      cy.get('input[name="email"]').click().type('etudiant@test.com')
+      cy.get('input[name="password"]').click().type('etudiant')
+      cy.get('.login > input[type="submit"]').click()
+      cy.location('pathname').should('eq', '/')
+    })
+  })
   describe('Présence des éléments de la page principale', function() {
     it('Parcours', function() {
-      cy.visit('http://localhost:8000/')
-      cy.get('.parcours').should('exists')
+      cy.get('.parcours').should('exist')
     })
     it('Modules', function() {
-      cy.get('.menuModules').should('exists')
+      cy.get('.menuModules').should('exist')
     })
     it('Cours', function() {
-      cy.get('.cours').should('exists')
+      cy.get('.cours').should('exist')
     })
   })
 
-  describe('Ajout d\' un cours', function() {
-    it('Validation du formulaire et redirection', function() {
-      cy.visit('http://localhost:8000')
-      cy.get('.buttonAjoutCours > button').click()
-      cy.location('pathname').should('eq', '/addCours')
-      cy.get('input[name="title"]').click().type('Base de données')
-      cy.get('input[name="description"]').click().type('Un cours sur les bases de données')
-      cy.get('input[name="video"]').click().type('https://www.youtube.com/embed/Ecv0PEOvLq0')
-      cy.get('input[name="modules"]').click().type('Master 1 MIAGE')
-      cy.get('.ajoutCours > input').click()
-      cy.location('pathname').should('eq', '/')
+  describe('Affichage des modules lors d\'un clic sur un parcours', function() {
+    it('Tous les modules sont affichés', function() {
+      cy.get('.parcours').contains('Developpeur Fullstack').click()
+      cy.get('button[name="boutonModule"]').contains('Master 1 DF').should('exist')
+      cy.get('button[name="boutonModule"]').contains('Master 2 DF').should('exist')
     })
-    it('Affichage du nouveau cours', function() {
-      cy.get('.leCours > .titre').should('contain', 'Base de données')
+  })
+  
+  describe('Affichage des cours lors d\'un clic sur un module', function() {
+    it('Les cours correspondants sont affichés', function() {
+      cy.get('.parcours').contains('Analyste Cyberdefense').click()
+      cy.get('.menuModules > button').contains('Master 1 AC').click()
+      cy.get('.leCours > .titre').should('contain', 'Rappels mathématiques')
     })
   })
 
   describe('Consultation d\'un cours', function() {
     it('Redirection', function() {
-      cy.visit('http://localhost:8000')
-      brands.get('.leCours > .titre').contains('POO').click()
-      cy.location('pathname').should('eq', '/cours/POO')
+      cy.wait(200)
+      cy.get('.leCours > button').click()
+      cy.location('pathname').should('eq', '/cours/Rappels%20math%C3%A9matiques')
     })
-    it('Présence des éléments', function() {
-      cy.get('.titreCours').should('exists')
-      cy.get('.descriptionCours').should('exists')
-      cy.get('.videoCours').should('exists')
+    it('Présence des éléments de cours', function() {
+      cy.get('.titreCours').should('exist')
+      cy.get('.descriptionCours').should('exist')
+      cy.get('.videoCours').should('exist')
     })
+    /*it('Présence du forum', function() {
+      cy.get('.forumButton').click({force: true})
+      cy.get('.theForum').should('exist')
+    })*/
     it('Retour à l\'accueil', function() {
-      cy.get('.accueilButton > button').click()
+      cy.get('.accueilButton > button').click({force: true})
       cy.location('pathname').should('eq', '/')
     })
   })
 
-  describe('Affichage des modules lors d\'un clic sur un parcours', function() {
-    it('Redirection', function() {
-      cy.visit('http://localhost:8000')
-      brands.get('.parcours').contains('MIAGE').click()
-      brands.get('.menuModules > button').should('contain', 'Licence 3  MIAGE')
-      brands.get('.menuModules > button').should('contain', 'Master 1 MIAGE')
-      brands.get('.menuModules > button').should('contain', 'Master 2 MIAGE')
+  // TESTS PROFIL PROFESSEUR
+
+  describe('Connection profil professeur', function() {
+    it('Deconnexion puis reconnexion ', function() {
+      cy.get('.deconnection').click()
+      cy.wait(500)
+      cy.get('input[name="email"]').click().type('professeur@test.com')
+      cy.get('input[name="password"]').click().type('professeur')
+      cy.get('.login > input[type="submit"]').click()
+      cy.location('pathname').should('eq', '/')
     })
   })
+  describe('Ajout d\' un cours', function() {
+    /*it('Validation du formulaire et redirection', function() {
+      cy.wait(500)
+      cy.get('.buttonAjoutCours > button').click()
+      cy.location('pathname').should('eq', '/addCours')
+      cy.get('input[name="title"]').click().type('Technologies pour applications connectées')
+      cy.get('input[name="description"]').click().type('L'UE Technologies pour Applications Connectées (TAC) se concentre sur le développement des applications connectées à Internet. Nous visons ici à d'abord approfondir les deux principaux modes de connexion : les applications Web classiques (HTML5 + JavaScript) et les applications mobiles (natives).')
+      cy.get('input[name="video"]').click().type('https://www.youtube.com/embed/5FUdrBq-WFo')
+      cy.get('input[name="modules"]').click().type('Master 2 DF')
+      cy.get('.ajoutCours > input').click()
+      cy.location('pathname').should('eq', '/')
+    })*/
+    /*it('Affichage du nouveau cours', function() {
+      cy.get('.parcours').contains('Developpeur Fullstack').click()
+      cy.get('.menuModules > button').contains('Master 2 DF').click()
+      cy.get('.leCours > .titre').should('contain', 'Technologies pour applications connectées')
+    })*/
+  })
+
+  //TESTS PROFIL ADMIN
+
+  describe('Connection profil administrateur', function() {
+    it('Deconnexion puis reconnexion ', function() {
+      cy.get('.deconnection').click()
+      cy.wait(500)
+      cy.get('input[name="email"]').click().type('admin@test.com')
+      cy.get('input[name="password"]').click().type('admin')
+      cy.get('.login > input[type="submit"]').click()
+      cy.location('pathname').should('eq', '/')
+    })
+    it('Consultation des demandes d\'élévation', function() {
+      cy.get('.consultElevations').click({force: true})
+      cy.location('pathname').should('eq', '/acceptPrivileges')
+    })
+  })
+
+
   
-  describe('Affichage des cours lors d\'un clic sur un module', function() {
-    it('Redirection', function() {
-      cy.visit('http://localhost:8000')
-      brands.get('.menuModules > button').contains('Master 2 MIAGE').click()
-      brands.get('.leCours > .titre').should('contain', 'QSI')
-    })
-  })

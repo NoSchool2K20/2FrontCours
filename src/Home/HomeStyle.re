@@ -8,7 +8,21 @@ let style = {j|
   .bienvenue{
     text-align : center;
     font-weight : bold;
-    margin-top : 40px;
+    padding-top : 55px;
+  }
+
+  .accueilNouveau{
+    padding-top:70px;
+    text-align : center;
+  }
+  .buttonNouveau button{
+    font-size: 15px;
+    background-color : #F7F7F7;
+    float:right;
+    margin : 5px;
+    border-radius : 3px;
+    height : 31px;
+    display:block;
   }
 
   .buttonPrivileges button{
@@ -28,6 +42,24 @@ let style = {j|
     height : 31px;
   }
 
+  .acceptPrivileges button{
+    font-size: 15px;
+    background-color : #F7F7F7;
+    float:right;
+    margin : 5px;
+    border-radius : 3px;
+    height : 31px;
+  }
+
+  .buttons button{
+    font-size: 15px;
+    background-color : #F7F7F7;
+    float:right;
+    margin : 5px;
+    border-radius : 3px;
+    height : 31px;
+  }
+
   .parcours {
     text-align: center;
     margin-bottom : 20px;
@@ -38,9 +70,16 @@ let style = {j|
     background-color: gainsboro;
     margin: 0 auto;
     width : 15%;
-    align-item:center;
     cursor: pointer;
+    display: inline-block;
+    align-items : center;
+    margin : 5px;
   }
+
+  .parcoursList{
+    text-align:center;
+  }
+
   .menuModules{
     border-top : 2px solid Gray;
     text-align : center;
@@ -67,12 +106,12 @@ let style = {j|
   .cours .leCours{
     display : inline-block;
     border : 1px solid Gray;
-    width : 20%;
+    width : auto;
     border-radius : 5px;
     margin : 5px;
     padding-bottom : 10px;
     background-color: rgb(224, 226, 229);
-    height : 153px;
+    height : auto;
     margin-top : 15px;
   }
 
