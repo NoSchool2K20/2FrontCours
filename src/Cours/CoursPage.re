@@ -107,21 +107,31 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
   let forum =
   <>
         <Forum token=User.getName(decodeToken(jsonbody)) titleCours=Cours.getTitle(stateCours) >
+
         </Forum>
   </>;
 
   <>
+  <div className="all">
+  <div className="allCours">
     <div className="accueilButton"> accueil </div>
     <div className="forumButton"> buttonForum </div>
     <div className="titreCours"> titre </div>
     <div className="descriptionCours"> description </div>
     <div className="videoCours">video</div>
-     
+   </div>
+   <div className="fo">
      {switch (stateForum) {
            | true =>
+           <button
+              onClick={_ => setStateForum(_ => false);}>
+              {React.string("Masquer le forum")}
+          </button>
              forum
            | _ =>
             <p> </p>
            }}
+    </div>
+    </div>
   </>;
 };

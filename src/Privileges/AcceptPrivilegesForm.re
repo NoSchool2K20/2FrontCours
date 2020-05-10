@@ -2,6 +2,12 @@ open AssignmentRequest;
 open AssignmentRequests;
 open User;
 [@bs.val] external atob: string => Js.String.t = "atob";
+[@bs.val] external document: Js.t({..}) = "document";
+
+let style = document##createElement("style");
+document##head##appendChild(style);
+style##innerHTML #= AcceptPrivilegesStyle.style;
+
 [@bs.deriving abstract]
 type jsProps = {
 
@@ -106,7 +112,7 @@ let acceptElevation = (assignmentRequestId) =>
       {switch (stateAssignment) {
        | [] =>
          <div className="noElevations"> 
-           {React.string("Aucune demande d'élévation pour le moment.")}
+           {React.string({j|"Aucune demande d'élévation pour le moment.|j})}
          </div>
        | _ =>
         <div className="elevationList">
@@ -114,13 +120,15 @@ let acceptElevation = (assignmentRequestId) =>
               (
                 React.array(Array.of_list(
                     List.map((p) =>
-                    <div className="elevation"> {React.string(AssignmentRequest.getEmailUserForAssignment(p))} 
-                    <button onClick={(_) => {acceptElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
+                    <div className="elevationDiv">
+                     <p>{React.string(AssignmentRequest.getEmailUserForAssignment(p) ++ {j| demande à avoir le profil |j}  ++ {j|AssignmentRequest.getRoleRequest(p)|j})}</p> 
+                    <button className="accepter" onClick={(_) => {acceptElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
                           {React.string("Accepter")}
                     </button>
-                    <button onClick={(_) => {refuseElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
+                    <button className="refuser" onClick={(_) => {refuseElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
                           {React.string("Refuser")}
                     </button>
+                    <div className="css"> </div> 
                     </div>
                     , stateAssignment)
                 ))

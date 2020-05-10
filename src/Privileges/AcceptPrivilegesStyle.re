@@ -6,30 +6,34 @@ let reasonReactBlue = "#48a9dc";
 // constructing a string
 let style = {j|
   
-form{
-    margin-top:50px;
+.titleElevation{
+    text-align : center;
+    font-weight : bold;
+    margin-bottom : 30px;
+    font-size : 20px;
 }
 
-.prof{
-    margin-bottom : 5px;
-    width : 150px;
+.elevationDiv{
+    text-align:center;
 }
 
-.retour{
-    margin-left: 30%;
+.css{
+  width   : 50%;  /* or 100px */
+  border-bottom:1px solid gray;
+  margin : 0 auto;
+  margin-top : 20px;
 }
 
-.submitElevation{
+.accepter, .refuser{
+    margin-left : 20px;
+}
+
+button{
     font-size: 15px;
     background-color : #F7F7F7;
+    margin : 5px;
     border-radius : 3px;
     height : 31px;
-	width : 175px;
-	margin-top : 10px;
-}
-
-.elevation{
-	width : 100px;
 }
 
 |j};

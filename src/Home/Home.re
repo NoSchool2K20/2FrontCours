@@ -271,7 +271,7 @@ let all =
                <div className="buttonNouveau">
                  buttonDroits
                  buttonDeconnection
-                <p className="accueilNouveau"> {React.string("Vous devez faire une demande d'élévation de privilèges afin d'accéder au contenu du site !")} </p>
+                <p className="accueilNouveau"> {React.string({j|Vous devez faire une demande d'élévation de privilèges afin d'accéder au contenu du site !|j})} </p>
                 </div>
                | _ =>
                 all

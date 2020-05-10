@@ -106,12 +106,12 @@ let style = {j|
   .cours .leCours{
     display : inline-block;
     border : 1px solid Gray;
-    width : 20%;
+    width : auto;
     border-radius : 5px;
     margin : 5px;
     padding-bottom : 10px;
     background-color: rgb(224, 226, 229);
-    height : 153px;
+    height : auto;
     margin-top : 15px;
   }
 

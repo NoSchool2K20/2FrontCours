@@ -48,7 +48,7 @@ let (state, setState) = React.useState(()=> {
 
 
 let form_askElevation = 
-<form className="formCours container card mt-1"
+<form className="formCours"
     onSubmit={event => {
     ReactEvent.Form.preventDefault(event);
     setState(state => {
@@ -118,14 +118,8 @@ let form_askElevation =
         />
     </div>
 
-            <div className="elevation">
-                <input type_="submit" value="Demander l'elevation" className="btn btn-primary"/>
-            </div>
-    
-
-                <a type_="button" className="retour text-primary" onClick={_ => {
-                        ReasonReactRouter.push("/")
-                }}>"Retour"->React.string</a>
+    <input type_="submit" value="Demander l'elevation" className="submitElevation"/>
+            
 
     {(state.error) ? <div className="form-text text-muted">"Something went wrong, please try again"->React.string</div> : ReasonReact.null}
     

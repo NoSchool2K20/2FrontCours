@@ -21,7 +21,7 @@ let style = {j|
     width: 500px; 
     border-radius: 12px;
     font-family: sans-serif;
-    height: 800px;
+    height: 560px;
   }
 
   .raffraichir, .envoyer{

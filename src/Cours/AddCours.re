@@ -41,7 +41,7 @@ let (state, setState) = React.useState(()=> {
 
 
 let form_cours = 
-<form className="formCours container card mt-1"
+<form className="formCours"
     onSubmit={event => {
     ReactEvent.Form.preventDefault(event);
     setState(state => {

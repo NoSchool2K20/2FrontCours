@@ -28,7 +28,7 @@ let style = {j|
     border-radius : 5px;
     background-color : #F7F7F7;
     padding : 5px;
-    float:right;
+    float:left;
   }
   .accueilButton button{
     font-size: 15px;
@@ -39,5 +39,19 @@ let style = {j|
   }
   .accueilButton{
     margin-bottom : 10px;
+  }
+  .all{
+    display : inline-block;
+  }
+  .allCours{
+    position:relative;
+  }
+  .allCours, .fo{
+    position : absolute;
+  }
+  .fo{
+    z-index:2;
+    left : 75%;
+    width : 17%;
   }
 |j};
