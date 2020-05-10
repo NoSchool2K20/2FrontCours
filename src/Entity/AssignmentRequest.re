@@ -92,7 +92,7 @@ module AssignmentRequests: {
   type t = list(AssignmentRequest.t);
 
   let fromJson: Js.Json.t => t =
-    json => json |> Json.Decode.(list(AssignmentRequest.fromJson));
+    json => json |> Json.Decode.(list(AssignmentRequest.fromJsonWithBoolean));
     
 
   let fromString = jsonString =>

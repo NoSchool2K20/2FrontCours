@@ -17,7 +17,7 @@ form{
 
 .title input, .description input, .video input, .modules input{
     border-radius : 3px;
-    width:20%;
+    width:35%;
     height:20px;
 }
 
@@ -27,6 +27,7 @@ form{
 
 .retour{
     margin-left: 30%;
+    margin-bottom : 10px;
 }
 
 .ajoutCours input{

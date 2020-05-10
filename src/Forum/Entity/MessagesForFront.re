@@ -1,13 +1,13 @@
 module MessagesForFront: {
   type t;
-  let make: (int, string, string, string, string, int, int) => t;
-  let getIdMessage: t => int;
+  let make: (string, string, string, string, string, string, string) => t;
+  let getIdMessage: t => string;
   let getTexte: t => string;
   let getDateEnvoi: t => string;
   let getIdCours: t => string;
   let getAuteur: t => string;
-  let getNbLikes : t => int;
-  let isLiked : t => int;
+  let getNbLikes : t => string;
+  let isLiked : t => string;
   let fromJson: Js.Json.t => t;
   let fromString: string => option(t);
   let toJson: t => Js.Json.t;
@@ -15,13 +15,13 @@ module MessagesForFront: {
   let transformDate : Js.Date.t => string;
 } = {
   type t = {
-    idmessage: int,
+    idmessage: string,
     texte: string,
     dateenvoi: string,
     idcours: string,
     auteur: string,
-    nblikes : int,
-    isliked : int
+    nblikes : string,
+    isliked : string
   };
 
   let make = (idmessage, texte, dateenvoi, idcours, auteur, nblikes, isliked) => {idmessage, texte, dateenvoi, idcours, auteur, nblikes, isliked};
@@ -38,13 +38,13 @@ module MessagesForFront: {
 
   let fromJson = json =>
     Json.Decode.{
-      idmessage: json |> field("idmessage", int),
+      idmessage: json |> field("idmessage", string),
       texte: json |> field("texte", string),
       dateenvoi: json |> field("dateenvoi", string),
       idcours: json |> field("idcours", string),
       auteur: json |> field("auteur", string),
-      nblikes: json |> field("nblikes", int),
-      isliked: json |> field("isliked", int),
+      nblikes: json |> field("nblikes", string),
+      isliked: json |> field("isliked", string),
 
     };
 
@@ -57,13 +57,13 @@ module MessagesForFront: {
   let toJson = message =>
     Json.Encode.(
       object_([
-        ("idmessage", string(string_of_int(message.idmessage))),
+        ("idmessage", string(message.idmessage)),
         ("texte", string(message.texte)),
         ("dateenvoi", string(message.dateenvoi)),
         ("idcours", string(message.idcours)),
         ("auteur", string(message.auteur)),
-        ("nblikes", string(string_of_int(message.nblikes))),
-        ("isliked", string(string_of_int(message.isliked))),
+        ("nblikes", string(message.nblikes)),
+        ("isliked", string(message.isliked)),
       ])
     );
   let toString = message => toJson(message) |> Js.Json.stringify;

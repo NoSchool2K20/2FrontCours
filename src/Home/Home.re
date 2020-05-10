@@ -137,7 +137,7 @@ let welcome=
 
   let buttonDroits=
   <>
-  <button
+  <button className="buttonDroits"
     onClick={_ => ReasonReactRouter.push("/askPrivileges")}>
     {React.string("Elevation de privileges")}
   </button>
@@ -145,7 +145,7 @@ let welcome=
 
    let acceptDroits=
   <>
-  <button
+  <button className="consultElevations"
     onClick={_ => ReasonReactRouter.push("/acceptPrivileges")}>
     {React.string("Demandes d'elevation")}
   </button>
@@ -153,7 +153,7 @@ let welcome=
 
   let buttonDeconnection=
   <>
-  <button
+  <button className="deconnection"
     onClick={_ => deco()}>
     {React.string("Deconnection")}
   </button>
@@ -195,8 +195,9 @@ let all =
            {React.string("Aucun parcours pour le moment")}
          </div>
        | _ =>
-        <div className="parcoursList">
+        <div>
         <div className="choseParcours">  {React.string("Nos parcours")} </div>
+        <div className="parcoursList">
               (
                 React.array(Array.of_list(
                     List.map((p) =>
@@ -204,6 +205,7 @@ let all =
                     , stateParcours)
                 ))
               )
+        </div>
         </div>
        }}
     </div>
@@ -269,7 +271,7 @@ let all =
                <div className="buttonNouveau">
                  buttonDroits
                  buttonDeconnection
-                <p className="accueilNouveau"> {React.string("Vous devez faire une demande d'élévation de privilèges afin d'accéder au contenu du site !")} </p>
+                <p className="accueilNouveau"> {React.string({j|Vous devez faire une demande d'élévation de privilèges afin d'accéder au contenu du site !|j})} </p>
                 </div>
                | _ =>
                 all

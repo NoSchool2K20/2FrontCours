@@ -20,6 +20,14 @@ style##innerHTML #= AddCoursStyle.style;
     
 [@react.component]
 let make = _ => {
+
+      let getTok = () => {
+let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
+  switch (tok) {
+  | None => ""
+  | Some(token) => token
+  }
+};
     
 let (state, setState) = React.useState(()=> {
     title: "",
@@ -33,7 +41,7 @@ let (state, setState) = React.useState(()=> {
 
 
 let form_cours = 
-<form className="formCours container card mt-1"
+<form className="formCours"
     onSubmit={event => {
     ReactEvent.Form.preventDefault(event);
     setState(state => {
@@ -53,7 +61,7 @@ let form_cours =
                 Fetch.RequestInit.make(
                     ~method_=Post,
                     ~body=Fetch.BodyInit.make(Js.Json.stringify(Js.Json.object_(payload))),
-                    ~headers=Fetch.HeadersInit.make({"Content-Type":"application/json"}),
+                    ~headers=Fetch.HeadersInit.make({"Content-Type":"application/json", "Authorization": "Bearer " ++ getTok()}),
                     ()
                 )
             )

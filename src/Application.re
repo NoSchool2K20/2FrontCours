@@ -18,7 +18,6 @@ let make = _ => {
     | ["addCours"] => <AddCours />
     | ["askPrivileges"] => <AskPrivileges />
     | ["acceptPrivileges"] => <AcceptPrivilegesForm />
-    | ["forum", token, titleCours] => <Forum token=token titleCours=titleCours/>
     | _ =>
       <p>
         <img src="https://media.giphy.com/media/VwoJkTfZAUBSU/giphy.gif" />

@@ -2,11 +2,22 @@ open AssignmentRequest;
 open AssignmentRequests;
 open User;
 [@bs.val] external atob: string => Js.String.t = "atob";
+[@bs.val] external document: Js.t({..}) = "document";
 
+let style = document##createElement("style");
+document##head##appendChild(style);
+style##innerHTML #= AcceptPrivilegesStyle.style;
+
+[@bs.deriving abstract]
+type jsProps = {
+
+  assignments: AssignmentRequests.t,
+};
 [@react.component]
 let make = _ => {
 let (stateAssignment, setStateAssignment) = React.useState(() => []);
-  
+let (stateAccepted, setStateAccepted) = React.useState(() => false);
+
 let decodeAssignment= json =>
     json |> AssignmentRequests.fromJson
   ;
@@ -44,6 +55,51 @@ let accueil =
       |> ignore
     );
 
+let acceptElevation = (assignmentRequestId) =>
+    Js.Promise.(
+            Fetch.fetchWithInit(
+                "https://noschool-authentication.cleverapps.io/assignmentRequest/" ++ assignmentRequestId ++ "/accept",
+                Fetch.RequestInit.make(
+                    ~method_=Post,
+                    ~headers=Fetch.HeadersInit.make({"Content-Type":"application/json", "Authorization": "Bearer " ++ getTok()}),
+                    ()
+                )
+            )
+            |> then_(Fetch.Response.json)
+            |> then_(_ => {
+                ReasonReactRouter.push("/acceptPrivileges");
+                Js.Promise.resolve();
+            })
+            |> catch(_ => {
+                Js.Promise.resolve();
+            })
+        );
+
+ React.useEffect0(() => {
+    getAllElevations();
+    None;
+  });
+
+  let refuseElevation = (assignmentRequestId) =>
+    Js.Promise.(
+            Fetch.fetchWithInit(
+                "https://noschool-authentication.cleverapps.io/assignmentRequest/" ++ assignmentRequestId ++ "/decline",
+                Fetch.RequestInit.make(
+                    ~method_=Post,
+                    ~headers=Fetch.HeadersInit.make({"Content-Type":"application/json", "Authorization": "Bearer " ++ getTok()}),
+                    ()
+                )
+            )
+            |> then_(Fetch.Response.json)
+            |> then_(_ => {
+                ReasonReactRouter.push("/acceptPrivileges");
+                Js.Promise.resolve();
+            })
+            |> catch(_ => {
+                Js.Promise.resolve();
+            })
+        );
+
  React.useEffect0(() => {
     getAllElevations();
     None;
@@ -56,7 +112,7 @@ let accueil =
       {switch (stateAssignment) {
        | [] =>
          <div className="noElevations"> 
-           {React.string("Aucune demande d'élévation pour le moment.")}
+           {React.string({j|"Aucune demande d'élévation pour le moment.|j})}
          </div>
        | _ =>
         <div className="elevationList">
@@ -64,7 +120,16 @@ let accueil =
               (
                 React.array(Array.of_list(
                     List.map((p) =>
-                    <div className="elevation" onClick={(_) => {getAllElevations();();}}> {React.string(AssignmentRequest.getEmailUserForAssignment(p))} </div>
+                    <div className="elevationDiv">
+                     <p>{React.string(AssignmentRequest.getEmailUserForAssignment(p) ++ {j| demande à avoir le profil |j}  ++ {j|AssignmentRequest.getRoleRequest(p)|j})}</p> 
+                    <button className="accepter" onClick={(_) => {acceptElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
+                          {React.string("Accepter")}
+                    </button>
+                    <button className="refuser" onClick={(_) => {refuseElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
+                          {React.string("Refuser")}
+                    </button>
+                    <div className="css"> </div> 
+                    </div>
                     , stateAssignment)
                 ))
               )
