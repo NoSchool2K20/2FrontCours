@@ -9,7 +9,7 @@
     "watch": "bsb -make-world -w -ws _ ",
     "clean": "bsb -clean-world",
     "bundle": "webpack",
-    "server": "moduleserve ./ --port 8080 --spa",
+    "server": "moduleserve ./ --address 0.0.0.0 --port 8080 --spa",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
