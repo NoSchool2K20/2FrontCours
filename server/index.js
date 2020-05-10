@@ -7,7 +7,7 @@ const helmet = require("helmet");
 
 const app = express();
 const PORT = process.env.PORT || 3998;
-const DIST = path.join(__dirname, "..");
+const DIST = path.join(__dirname, "..", "bundleOutput");
 
 app.enable("trust proxy");
 
