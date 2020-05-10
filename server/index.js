@@ -29,7 +29,7 @@ app.get("*", (req, res) =>
   fs.createReadStream(path.join(DIST, "index.html")).pipe(res)
 );
 
-app.listen(PORT,"0.0.0.0", () =>
+app.listen(PORT, () =>
   process.stdout.write(`server started on port ${PORT}\n`)
 );
 
