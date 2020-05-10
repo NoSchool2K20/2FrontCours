@@ -2,7 +2,7 @@
   "name": "noschool2k20",
   "version": "0.1.0",
   "scripts": {
-    "start": "node server",
+    "start": "npm run server",
     "build": "bsb -clean-world && bsb -make-world",
     "buildw": "bsb -clean-world && bsb -make-world -w",
     "dev": "concurrently -c magenta,cyan \"npm:watch\" \"npm:server\"",
