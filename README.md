@@ -5,6 +5,7 @@
 2. [Contexte global](#context)
 3. [Le projet «Front-end cours»](#project)
 4. [Installation du projet en local](#installation)
+5. [Rappel des identifiants](#identifiants)
 
 ## <a id="wiki"></a>Accès au wiki "synthèse" de l'équipe
 [Le wiki est accessible par ici](https://github.com/NoSchool2K20/2FrontCours/wiki)
@@ -91,3 +92,30 @@ Le serveur est à ce moment là en écoute sur le port 8000
 npm run dev
 ```
 Le serveur est alors en écoute sur le port 8000
+
+## Rappel des identifiants
+Les identifiants de service nous ont été fournis par l'équipe quatre pour faire des tests selon les rôles attribués.
+### Compte nouveau :
+```
+id : nouveau@test.com
+password : nouveau
+```
+
+### Compte etudiant :
+```
+id : etudiant@test.com
+password : etudiant
+```
+
+### Compte prof :
+```
+id : professeur@test.com
+password : professeur
+```
+
+### Compte admin :
+```
+email : admin@test.com
+id : admin
+password : admin
+```
