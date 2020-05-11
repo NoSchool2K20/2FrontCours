@@ -123,11 +123,12 @@ let tok = Dom.Storage.getItem("token", Dom.Storage.localStorage);
    <div className="fo">
      {switch (stateForum) {
            | true =>
-           <button
-              onClick={_ => setStateForum(_ => false);}>
-              {React.string("Masquer le forum")}
+           <div>
+           <button className="maskFo" onClick={_ => setStateForum(_ => false);}>
+              {React.string("Fermer")}
           </button>
              forum
+             </div>
            | _ =>
             <p> </p>
            }}

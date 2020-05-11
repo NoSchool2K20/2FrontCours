@@ -106,7 +106,7 @@ let style = {j|
   .cours .leCours{
     display : inline-block;
     border : 1px solid Gray;
-    width : auto;
+    width : 70%;
     border-radius : 5px;
     margin : 5px;
     padding-bottom : 10px;

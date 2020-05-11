@@ -7,7 +7,7 @@ let style = {j|
     overflow-y: scroll;
     float:right;
     clear:right;
-    height: 570px;
+    height: auto;
     width: 100%;
     margin-top: 5%;
 }
@@ -32,6 +32,10 @@ let style = {j|
 }
 .info{
     padding-top: 5%;
+}
+
+.divForum{
+
 }
 
 |j};

@@ -10,7 +10,7 @@ let style = {j|
     background-color: rgb(224, 226, 229);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
     float:right;
     clear:right;
     margin-right:2%;
@@ -22,6 +22,7 @@ let style = {j|
     border-radius: 12px;
     font-family: sans-serif;
     height: 560px;
+    border : 1px solid grey;
   }
 
   .raffraichir, .envoyer{

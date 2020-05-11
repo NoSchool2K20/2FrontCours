@@ -121,7 +121,7 @@ let acceptElevation = (assignmentRequestId) =>
                 React.array(Array.of_list(
                     List.map((p) =>
                     <div className="elevationDiv">
-                     <p>{React.string(AssignmentRequest.getEmailUserForAssignment(p) ++ {j| demande à avoir le profil |j}  ++ {j|AssignmentRequest.getRoleRequest(p)|j})}</p> 
+                     <p>{React.string(AssignmentRequest.getEmailUserForAssignment(p) ++ {j| demande à avoir le profil |j}  ++ AssignmentRequest.getRoleRequest(p))}</p> 
                     <button className="accepter" onClick={(_) => {acceptElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
                           {React.string("Accepter")}
                     </button>
