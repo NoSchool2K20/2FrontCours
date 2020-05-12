@@ -123,9 +123,11 @@ password : admin
 ## URLs
 
 (URLs disponibles après déploiement en local).
+Toutes les pages (sauf connexion, bien entendu) sont disponibles uniquement après connexion avec un compte uilisateur.
+Si aucune connexion n'a été faite, l'utilisateur est redirigé vers la connexion.
 
 - Connexion : [http://localhost:8000/connection](http://localhost:8000/connection)
-- Page principale (disponible après connexion) : [http://localhost:8000/](http://localhost:8000/)
+- Page principale : [http://localhost:8000/](http://localhost:8000/)
 - Consultation d'un cours TO DO : [http://localhost:8000/connection](http://localhost:8000/connection)
 - Ajout d'un cours (disponible pour un Administrateur ou un Professeur) : [http://localhost:8000/addCours](http://localhost:8000/addCours)
 - Consultation des demandes d'élévation (disponible pour un Administrateur) : (disponible pour un Administrateur ou un Professeur) : [http://localhost:8000/acceptPrivileges](http://localhost:8000/acceptPrivileges)
