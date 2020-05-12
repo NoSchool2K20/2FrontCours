@@ -12,7 +12,7 @@ afterEach(() => {
 
 describe('Création de compte / Connection', function() {
     it('Creation du compte', function() {
-      cy.visit('http://localhost:8000/connection')
+      cy.visit('http://localhost:8080/connection')
       cy.wait(500)
       cy.get('.create').click()
       cy.wait(500)
@@ -26,7 +26,7 @@ describe('Création de compte / Connection', function() {
       cy.get('.FormulaireConnection').should('exist')
     })
     it('Connection avec le compte créé', function() {
-      cy.visit('http://localhost:8000/connection')
+      cy.visit('http://localhost:8080/connection')
       cy.wait(500)
       cy.get('input[name="email"]').click().type('test@prof.fr')
       cy.get('input[name="password"]').click().type('testmdp')
