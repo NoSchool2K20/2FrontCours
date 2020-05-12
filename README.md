@@ -97,26 +97,25 @@ Le serveur est alors en écoute sur le port 8000
 Les identifiants de service nous ont été fournis par l'équipe quatre pour faire des tests selon les rôles attribués.
 ### Compte nouveau :
 ```
-id : nouveau@test.com
+user : nouveau@test.com
 password : nouveau
 ```
 
 ### Compte etudiant :
 ```
-id : etudiant@test.com
+user : etudiant@test.com
 password : etudiant
 ```
 
 ### Compte prof :
 ```
-id : professeur@test.com
+user : professeur@test.com
 password : professeur
 ```
 
 ### Compte admin :
 ```
-email : admin@test.com
-id : admin
+user : admin@test.com
 password : admin
 ```
 
