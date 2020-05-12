@@ -6,6 +6,7 @@
 3. [Le projet «Front-end cours»](#project)
 4. [Installation du projet en local](#installation)
 5. [Rappel des identifiants](#identifiants)
+6. [URLs](#urls)
 
 ## <a id="wiki"></a>Accès au wiki "synthèse" de l'équipe
 [Le wiki est accessible par ici](https://github.com/NoSchool2K20/2FrontCours/wiki)
@@ -86,14 +87,14 @@ Pour construire une architecture fonctionnelle du projet.
 ```bash
 npm run server
 ```
-Le serveur est à ce moment là en écoute sur le port 8000
+Le serveur est à ce moment là en écoute sur le port 8080
 ### Lancement en mode développement
 ```bash
 npm run dev
 ```
-Le serveur est alors en écoute sur le port 8000
+Le serveur est alors en écoute sur le port 8080
 
-## Rappel des identifiants
+## <a id="identifiants"></a>Rappel des identifiants
 Les identifiants de service nous ont été fournis par l'équipe quatre pour faire des tests selon les rôles attribués.
 ### Compte nouveau :
 ```
@@ -119,15 +120,15 @@ user : admin@test.com
 password : admin
 ```
 
-## URLs
+## <a id="urls"></a>URLs
 
 (URLs disponibles après déploiement en local).
 Toutes les pages (sauf connexion, bien entendu) sont disponibles uniquement après connexion avec un compte uilisateur.
 Si aucune connexion n'a été faite, l'utilisateur est redirigé vers la connexion.
 
-- Connexion : [http://localhost:8000/connection](http://localhost:8000/connection)
-- Page principale : [http://localhost:8000/](http://localhost:8000/)
-- Consultation d'un cours TO DO : [http://localhost:8000/connection](http://localhost:8000/connection)
-- Ajout d'un cours (disponible pour un Administrateur ou un Professeur) : [http://localhost:8000/addCours](http://localhost:8000/addCours)
-- Consultation des demandes d'élévation (disponible pour un Administrateur) : (disponible pour un Administrateur ou un Professeur) : [http://localhost:8000/acceptPrivileges](http://localhost:8000/acceptPrivileges)
-- Demande d'élévation (disponible pour un Nouveau) : [http://localhost:8000/askPrivileges](http://localhost:8000/askPrivileges)
+- Connexion : [http://localhost:8080/connection](http://localhost:8080/connection)
+- Page principale : [http://localhost:8080/](http://localhost:8080/)
+- Consultation d'un cours : [http://localhost:8080/cours/Rappels%20mathematiques](http://localhost:8080/cours/Rappels%20mathematiques)
+- Ajout d'un cours (disponible pour un Administrateur ou un Professeur) : [http://localhost:8080/addCours](http://localhost:8080/addCours)
+- Consultation des demandes d'élévation (disponible pour un Administrateur) : (disponible pour un Administrateur ou un Professeur) : [http://localhost:8080/acceptPrivileges](http://localhost:8080/acceptPrivileges)
+- Demande d'élévation (disponible pour un Nouveau) : [http://localhost:8080/askPrivileges](http://localhost:8080/askPrivileges)
