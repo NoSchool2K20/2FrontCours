@@ -21,7 +21,7 @@ let style = {j|
     width: 1080px;
     border-radius: 12px;
     font-family: sans-serif;
-    background-color : #F7F7F7;
+    background-color :#F2EFEF;
   }
   .containerTitle {
     background-color: rgb(242, 243, 245);
@@ -30,7 +30,7 @@ let style = {j|
     font-weight: bold;
   }
   .containerContent {
-    background-color: #F7F7F7;
+    background-color: #F2EFEF;
     border-radius: 12px 12px 12px 12px;
   }
   

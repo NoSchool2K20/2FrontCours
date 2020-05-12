@@ -112,7 +112,7 @@ let acceptElevation = (assignmentRequestId) =>
       {switch (stateAssignment) {
        | [] =>
          <div className="noElevations"> 
-           {React.string({j|"Aucune demande d'élévation pour le moment.|j})}
+           {React.string({j|Aucune demande d'élévation pour le moment.|j})}
          </div>
        | _ =>
         <div className="elevationList">
@@ -121,7 +121,7 @@ let acceptElevation = (assignmentRequestId) =>
                 React.array(Array.of_list(
                     List.map((p) =>
                     <div className="elevationDiv">
-                     <p>{React.string(AssignmentRequest.getEmailUserForAssignment(p) ++ {j| demande à avoir le profil |j}  ++ {j|AssignmentRequest.getRoleRequest(p)|j})}</p> 
+                     <p>{React.string(AssignmentRequest.getEmailUserForAssignment(p) ++ {j| demande à avoir le profil |j}  ++ AssignmentRequest.getRoleRequest(p))}</p> 
                     <button className="accepter" onClick={(_) => {acceptElevation(AssignmentRequest.getAssignmentRequestId(p));();}}>
                           {React.string("Accepter")}
                     </button>

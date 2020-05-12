@@ -8,11 +8,18 @@ let style = {j|
 padding: 5px;
 float: right;
 clear: right;
-border: 1px solid grey;
 border-radius: 8px;
 width: 95%;
 margin-right: 2%;
+height : auto;
 }
+
+.allMessage{
+  border : 1px solid grey;
+  border-radius : 10px;
+  margin : 20px;
+}
+
   .auteur{
     font-size: 15px;
     border-radius : 5px;

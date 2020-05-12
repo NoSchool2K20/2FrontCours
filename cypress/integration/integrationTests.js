@@ -11,12 +11,12 @@ afterEach(() => {
 });
 
 describe('Création de compte / Connection', function() {
-    /*it('Creation du compte', function() {
+    it('Creation du compte', function() {
       cy.visit('http://localhost:8000/connection')
       cy.wait(500)
       cy.get('.create').click()
       cy.wait(500)
-      cy.get('.createMail > input').click().type('test@cypress.fr')
+      cy.get('.createMail > input').click().type('test@prof.fr')
       cy.get('.createMdp > input').click().type('testmdp')
       cy.get('.createPseudo > input').click().type('Test')
       cy.get('.createName > input').click().type('Cypress')
@@ -24,11 +24,11 @@ describe('Création de compte / Connection', function() {
       cy.get('.submitCreate > input[type="submit"]').click()
       cy.wait(500)
       cy.get('.FormulaireConnection').should('exist')
-    })*/
+    })
     it('Connection avec le compte créé', function() {
       cy.visit('http://localhost:8000/connection')
       cy.wait(500)
-      cy.get('input[name="email"]').click().type('lea@lea.fr')
+      cy.get('input[name="email"]').click().type('test@prof.fr')
       cy.get('input[name="password"]').click().type('testmdp')
       cy.get('.login > input[type="submit"]').click()
       cy.location('pathname').should('eq', '/')
@@ -43,7 +43,7 @@ describe('Création de compte / Connection', function() {
   it('Demande d\'élévation de pivilèges', function() {
     cy.get('.buttonDroits').click()
     cy.get('.prof > input').click()
-    cy.get('.elevation > input').click()
+    cy.get('.submitElevation').click()
     cy.location('pathname').should('eq', '/')
   })
   })
@@ -83,14 +83,14 @@ describe('Création de compte / Connection', function() {
     it('Les cours correspondants sont affichés', function() {
       cy.get('.parcours').contains('Analyste Cyberdefense').click()
       cy.get('.menuModules > button').contains('Master 1 AC').click()
-      cy.get('.leCours > .titre').should('contain', 'Rappels mathématiques')
+      cy.get('.leCours > .titre').contains('Rappels mathématiques').should('exist')
     })
   })
 
   describe('Consultation d\'un cours', function() {
     it('Redirection', function() {
       cy.wait(200)
-      cy.get('.leCours > button').click()
+      cy.get('.leCours > button').eq(0).click()
       cy.location('pathname').should('eq', '/cours/Rappels%20math%C3%A9matiques')
     })
     it('Présence des éléments de cours', function() {
@@ -98,10 +98,10 @@ describe('Création de compte / Connection', function() {
       cy.get('.descriptionCours').should('exist')
       cy.get('.videoCours').should('exist')
     })
-    /*it('Présence du forum', function() {
-      cy.get('.forumButton').click({force: true})
+    it('Présence du forum', function() {
+      cy.get('.forumButton > button').click({force: true})
       cy.get('.theForum').should('exist')
-    })*/
+    })
     it('Retour à l\'accueil', function() {
       cy.get('.accueilButton > button').click({force: true})
       cy.location('pathname').should('eq', '/')
@@ -121,22 +121,22 @@ describe('Création de compte / Connection', function() {
     })
   })
   describe('Ajout d\' un cours', function() {
-    /*it('Validation du formulaire et redirection', function() {
+    it('Validation du formulaire et redirection', function() {
       cy.wait(500)
       cy.get('.buttonAjoutCours > button').click()
       cy.location('pathname').should('eq', '/addCours')
-      cy.get('input[name="title"]').click().type('Technologies pour applications connectées')
-      cy.get('input[name="description"]').click().type('L'UE Technologies pour Applications Connectées (TAC) se concentre sur le développement des applications connectées à Internet. Nous visons ici à d'abord approfondir les deux principaux modes de connexion : les applications Web classiques (HTML5 + JavaScript) et les applications mobiles (natives).')
-      cy.get('input[name="video"]').click().type('https://www.youtube.com/embed/5FUdrBq-WFo')
+      cy.get('input[name="title"]').click().type('Tests avec Cypress')
+      cy.get('input[name="description"]').click().type('Ce cours vise à découvrir l\'outil Cypress.')
+      cy.get('input[name="video"]').click().type('https://www.youtube.com/embed/fKG9KaOTnxw')
       cy.get('input[name="modules"]').click().type('Master 2 DF')
       cy.get('.ajoutCours > input').click()
       cy.location('pathname').should('eq', '/')
-    })*/
-    /*it('Affichage du nouveau cours', function() {
+    })
+    it('Affichage du nouveau cours', function() {
       cy.get('.parcours').contains('Developpeur Fullstack').click()
       cy.get('.menuModules > button').contains('Master 2 DF').click()
-      cy.get('.leCours > .titre').should('contain', 'Technologies pour applications connectées')
-    })*/
+      cy.get('.leCours > .titre').should('contain', 'Tests avec Cypress')
+    })
   })
 
   //TESTS PROFIL ADMIN
@@ -153,6 +153,19 @@ describe('Création de compte / Connection', function() {
     it('Consultation des demandes d\'élévation', function() {
       cy.get('.consultElevations').click({force: true})
       cy.location('pathname').should('eq', '/acceptPrivileges')
+      cy.get('.accepter').click()
+    })
+    it('Vérification du nouveau profil', function() {
+      cy.wait(500)
+      cy.get('.accueilButton > button').click({force: true})
+      cy.get('.deconnection').click()
+      cy.wait(500)
+      cy.get('input[name="email"]').click().type('test@prof.fr')
+      cy.get('input[name="password"]').click().type('testmdp')
+      cy.get('.login > input[type="submit"]').click()
+
+      cy.get('.buttonAjoutCours > button').should('exist')
+
     })
   })
 

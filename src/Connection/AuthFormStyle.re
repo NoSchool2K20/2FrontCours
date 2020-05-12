@@ -41,7 +41,6 @@ let style = {j|
 }
 
 .login{
-    margin-left: 30%;
 }
 
 .login input{
@@ -65,7 +64,7 @@ let style = {j|
 	border-radius:2px;
 	width:120px;
 	border:none;
-    margin-left : 62px;
+    margin-left : 300px;
     cursor: pointer
     margin-top : 20px;
 }

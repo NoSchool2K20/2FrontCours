@@ -233,7 +233,9 @@ let all =
     <div className="cours">
     <div className="buttonAjoutCours"> 
     {switch (User.getUserRole(decodeToken(jsonbody))) {
-           | "Professeur" =>
+           | ("Professeur") =>
+             buttonAjoutCours
+           | ("Administrateur") =>
              buttonAjoutCours
            | _ =>
             <p></p>

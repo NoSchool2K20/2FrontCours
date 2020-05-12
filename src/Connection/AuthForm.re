@@ -37,7 +37,7 @@ let (state, setState) = React.useState(()=> {
 
 
 let form_authent = 
-<form className="formConnect container card mt-1"
+<form className="formConnect"
     onSubmit={event => {
     ReactEvent.Form.preventDefault(event);
     setState(state => {
@@ -109,15 +109,16 @@ let form_authent =
     <div className="form-group">
         <div className="row">
             <div className="col">
+            <div className="login col text-right">
+                <input type_="submit" value="Login" className="btn btn-primary"/>
+            </div>
                 <a type_="button" className="create text-primary" onClick={_ => {
                     setState(_ => {
                         email: "", password: "", submitted: false, formDisplay:false, pseudo: "", name: "", surname: "", userRole: "", error: false
                     });
                 }}>"Create account"->React.string</a>
             </div>
-            <div className="login col text-right">
-                <input type_="submit" value="Login" className="btn btn-primary"/>
-            </div>
+            
         </div>
     </div>
 
@@ -126,7 +127,7 @@ let form_authent =
 </form>;
 let form_create = 
     
-<form className="formCreate container card mt-1"
+<form className="formCreate"
     onSubmit={event => {
     ReactEvent.Form.preventDefault(event);
     setState(state =>{

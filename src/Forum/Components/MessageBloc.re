@@ -113,7 +113,7 @@ let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilis
       };
       let content_mess = 
       if(state.hasdel == false) {
-        <div className="content">
+        <div className="allMessage">
         
         <div className="info">
         <img className="user" 
