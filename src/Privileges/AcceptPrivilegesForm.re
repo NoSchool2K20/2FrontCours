@@ -112,7 +112,7 @@ let acceptElevation = (assignmentRequestId) =>
       {switch (stateAssignment) {
        | [] =>
          <div className="noElevations"> 
-           {React.string({j|"Aucune demande d'élévation pour le moment.|j})}
+           {React.string({j|Aucune demande d'élévation pour le moment.|j})}
          </div>
        | _ =>
         <div className="elevationList">

@@ -153,7 +153,7 @@ describe('Création de compte / Connection', function() {
     it('Consultation des demandes d\'élévation', function() {
       cy.get('.consultElevations').click({force: true})
       cy.location('pathname').should('eq', '/acceptPrivileges')
-      //cy.get('.accepter').click()
+      cy.get('.accepter').click()
     })
     it('Vérification du nouveau profil', function() {
       cy.wait(500)
