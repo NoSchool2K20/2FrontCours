@@ -34,7 +34,7 @@
     "express": "^4.17.1",
     "helmet": "^3.21.2",
     "js-base64": "^2.5.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "reason-react": ">=0.7.0",
